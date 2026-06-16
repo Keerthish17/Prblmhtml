@@ -1,0 +1,1638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Optimize Mastery — Choose → Contribute → Win</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --bg:      #07070d;
+  --surface: #0f0f1a;
+  --card:    #14141f;
+  --border:  #1e1e30;
+  --accent:  #7c6af7;
+  --a2:      #f77c6a;
+  --a3:      #6af7c4;
+  --a4:      #f7d06a;
+  --a5:      #f76af7;
+  --text:    #e4e4f0;
+  --muted:   #6a6a8a;
+  --code:    #0a0a15;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:15px;line-height:1.75}
+
+/* ── HERO ── */
+.hero{
+  background:linear-gradient(135deg,#07070d 0%,#100d20 50%,#07100d 100%);
+  border-bottom:1px solid var(--border);
+  padding:72px 40px 56px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 40% at 50% 0%,rgba(124,106,247,0.12),transparent);
+  pointer-events:none;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(124,106,247,0.1);border:1px solid rgba(124,106,247,0.3);
+  color:var(--accent);font-family:'JetBrains Mono',monospace;
+  font-size:11px;letter-spacing:3px;text-transform:uppercase;
+  padding:5px 16px;border-radius:99px;margin-bottom:28px;
+}
+.hero h1{font-size:clamp(2.2rem,5vw,4rem);font-weight:900;letter-spacing:-2px;line-height:1.05;margin-bottom:20px}
+.hero h1 em{color:var(--accent);font-style:normal}
+.hero-sub{color:var(--muted);font-size:16px;max-width:600px;margin:0 auto 40px;line-height:1.6}
+.mental-model{
+  display:inline-flex;flex-wrap:wrap;gap:0;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:12px;overflow:hidden;margin-bottom:40px;
+}
+.mm-step{
+  padding:10px 20px;font-size:13px;font-family:'JetBrains Mono',monospace;
+  border-right:1px solid var(--border);position:relative;
+}
+.mm-step:last-child{border-right:none}
+.mm-step .lbl{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:2px}
+.mm-step .val{color:var(--text);font-weight:600}
+.mm-step::after{
+  content:'→';position:absolute;right:-10px;top:50%;transform:translateY(-50%);
+  color:var(--accent);font-size:12px;z-index:1;
+}
+.mm-step:last-child::after{display:none}
+.hero-stats{display:flex;gap:40px;justify-content:center;flex-wrap:wrap}
+.stat .n{font-size:2rem;font-weight:900;color:var(--accent);font-family:'JetBrains Mono',monospace}
+.stat .l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:2px}
+
+/* ── NAV ── */
+.topnav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(7,7,13,0.96);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  display:flex;overflow-x:auto;scrollbar-width:none;
+}
+.topnav::-webkit-scrollbar{display:none}
+.topnav a{
+  flex-shrink:0;padding:14px 18px;color:var(--muted);text-decoration:none;
+  font-size:12px;font-weight:600;letter-spacing:0.5px;
+  border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;
+}
+.topnav a:hover{color:var(--text);border-color:var(--accent)}
+.nav-cat{
+  flex-shrink:0;padding:14px 12px 14px 20px;
+  font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;
+  color:var(--border);border-left:1px solid var(--border);
+}
+
+/* ── MAIN ── */
+.main{max-width:980px;margin:0 auto;padding:56px 24px 100px}
+
+/* ── SECTION HEADS ── */
+.cat-header{
+  background:linear-gradient(135deg,var(--surface),var(--card));
+  border:1px solid var(--border);border-radius:16px;
+  padding:32px 36px;margin:64px 0 32px;
+  position:relative;overflow:hidden;
+}
+.cat-header::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--accent),var(--a3));
+}
+.cat-eyebrow{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);font-family:'JetBrains Mono',monospace;margin-bottom:8px}
+.cat-header h2{font-size:1.8rem;font-weight:900;letter-spacing:-1px;margin-bottom:8px}
+.cat-header p{color:var(--muted);font-size:14px;margin:0}
+.pattern-pill{
+  display:inline-block;background:rgba(124,106,247,0.12);
+  border:1px solid rgba(124,106,247,0.3);color:var(--accent);
+  font-family:'JetBrains Mono',monospace;font-size:11px;
+  padding:4px 12px;border-radius:99px;margin:12px 4px 0 0;
+}
+
+/* ── LEVEL CARD ── */
+.level{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:14px;padding:36px;margin:24px 0;
+  position:relative;overflow:hidden;
+}
+.level::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--accent)}
+.lvl-subarray::before{background:linear-gradient(180deg,var(--accent),var(--a3))}
+.lvl-pointer::before{background:linear-gradient(180deg,var(--a3),#6af7f7)}
+.lvl-swap::before{background:linear-gradient(180deg,var(--a4),var(--a2))}
+.lvl-remove::before{background:linear-gradient(180deg,var(--a2),var(--a5))}
+.lvl-moves::before{background:linear-gradient(180deg,var(--a5),var(--accent))}
+.lvl-split::before{background:linear-gradient(180deg,var(--a4),var(--a3))}
+
+.lv-header{display:flex;align-items:flex-start;gap:20px;margin-bottom:24px}
+.lv-badge{
+  flex-shrink:0;width:52px;height:52px;border-radius:12px;
+  background:rgba(124,106,247,0.1);border:2px solid rgba(124,106,247,0.3);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-family:'JetBrains Mono',monospace;
+}
+.lv-badge .lv{font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+.lv-badge .ln{font-size:20px;font-weight:700;color:var(--accent);line-height:1}
+.lv-info h3{font-size:1.25rem;font-weight:800;letter-spacing:-0.3px;margin-bottom:4px}
+.lv-info .lc{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.tag{font-size:10px;padding:3px 10px;border-radius:99px;font-family:'JetBrains Mono',monospace;font-weight:600}
+.tag-g{background:rgba(106,247,196,0.1);color:var(--a3);border:1px solid rgba(106,247,196,0.25)}
+.tag-y{background:rgba(247,208,106,0.1);color:var(--a4);border:1px solid rgba(247,208,106,0.25)}
+.tag-r{background:rgba(247,124,106,0.1);color:var(--a2);border:1px solid rgba(247,124,106,0.25)}
+.tag-p{background:rgba(124,106,247,0.12);color:var(--accent);border:1px solid rgba(124,106,247,0.3)}
+.tag-m{background:rgba(247,106,247,0.1);color:var(--a5);border:1px solid rgba(247,106,247,0.25)}
+
+/* ── PROBLEM BOX ── */
+.prob-box{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:10px;padding:20px 24px;margin:18px 0;
+}
+.prob-box .pb-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:10px}
+
+/* ── OLD / NEW ── */
+.view-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0}
+@media(max-width:600px){.view-grid{grid-template-columns:1fr}}
+.vbox{border-radius:10px;padding:18px 20px}
+.vbox.old{background:#1f0f0f;border:1px solid rgba(247,124,106,0.25)}
+.vbox.new{background:#0f1f14;border:1px solid rgba(106,247,196,0.25)}
+.vbox .vlabel{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+.vbox.old .vlabel{color:var(--a2)}
+.vbox.new .vlabel{color:var(--a3)}
+.vbox pre{background:transparent;border:none;padding:0;margin:0;font-size:12px;line-height:1.7}
+
+/* ── AHA ── */
+.aha{
+  background:#1a160a;border:1px solid rgba(247,208,106,0.3);
+  border-left:4px solid var(--a4);border-radius:10px;
+  padding:20px 24px;margin:18px 0;
+}
+.aha-lbl{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--a4);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.aha p{color:var(--a4);font-size:14px;font-weight:600;margin:0;line-height:1.65}
+.aha p span{color:var(--text);font-weight:400}
+
+/* ── INSIGHT ── */
+.insight{
+  background:rgba(124,106,247,0.06);border:1px solid rgba(124,106,247,0.2);
+  border-radius:10px;padding:20px 24px;margin:18px 0;
+}
+.insight-lbl{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.insight p{color:#c0c0e0;font-size:14px;margin:0 0 8px}
+.insight p:last-child{margin:0}
+
+/* ── THINK STEPS ── */
+.think{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px 24px;margin:18px 0}
+.think h4{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.tstep{display:flex;gap:14px;margin:10px 0;align-items:flex-start}
+.tstep-num{flex-shrink:0;width:26px;height:26px;background:var(--accent);color:#fff;border-radius:50%;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;margin-top:1px}
+.tstep p{margin:0;color:var(--text);font-size:14px}
+.tstep strong{color:var(--a4)}
+
+/* ── CODE ── */
+pre,code{font-family:'JetBrains Mono',monospace;font-size:13px}
+pre{background:var(--code);border:1px solid var(--border);border-radius:8px;padding:18px 20px;overflow-x:auto;margin:12px 0;line-height:1.65;color:#c0c8e8}
+code{background:rgba(124,106,247,0.12);color:var(--accent);padding:1px 6px;border-radius:4px;font-size:12px}
+pre code{background:none;color:inherit;padding:0;font-size:inherit}
+.c-green{color:var(--a3)}
+.c-red{color:var(--a2)}
+.c-yellow{color:var(--a4)}
+.c-purple{color:var(--accent)}
+.c-muted{color:var(--muted)}
+
+/* ── DRY RUN TABLE ── */
+.drt{width:100%;border-collapse:collapse;margin:14px 0;font-size:12px}
+.drt th,.drt td{padding:9px 13px;border:1px solid var(--border);text-align:left;font-family:'JetBrains Mono',monospace}
+.drt th{background:rgba(124,106,247,0.08);color:var(--accent);font-size:10px;letter-spacing:1px;text-transform:uppercase}
+.drt tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
+.drt .hi{background:rgba(247,208,106,0.1);color:var(--a4);font-weight:700}
+.drt .good{color:var(--a3);font-weight:700}
+.drt .bad{color:var(--a2);font-weight:700}
+.drt .key{color:var(--accent);font-weight:700}
+
+/* ── EDGE CASE BOX ── */
+.edge{
+  background:#0f0f1a;border:1px solid var(--border);
+  border-top:2px solid var(--a2);border-radius:10px;
+  padding:18px 22px;margin:18px 0;
+}
+.edge-lbl{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--a2);margin-bottom:10px}
+.edge-item{display:flex;gap:12px;margin:8px 0;align-items:flex-start;font-size:13px;color:#c0c0d8}
+.edge-item::before{content:'⚠';flex-shrink:0;color:var(--a2)}
+
+/* ── TEMPLATE BOX ── */
+.template{
+  background:#0a0a16;border:1px solid rgba(124,106,247,0.3);
+  border-radius:10px;padding:22px 24px;margin:18px 0;
+}
+.template-lbl{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.template-lbl::before{content:'📋'}
+
+/* ── PROGRESS ── */
+.prog{height:3px;background:var(--border);border-radius:2px;margin:0 0 28px}
+.prog-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--a3))}
+
+/* ── CHEAT SHEET ── */
+.cheat-section{margin:64px 0 0}
+.cheat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin:24px 0}
+.cheat-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:12px;padding:22px;
+}
+.cheat-card h4{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:12px;font-family:'JetBrains Mono',monospace}
+.cheat-card p{font-size:13px;color:#a0a0c0;line-height:1.6;margin:0 0 8px}
+.cheat-card p:last-child{margin:0}
+.cheat-card code{font-size:11px}
+
+/* ── MASTER TEMPLATE ── */
+.master-template{
+  background:linear-gradient(135deg,#0a0816,#080f0a);
+  border:1px solid rgba(124,106,247,0.4);border-radius:14px;
+  padding:32px;margin:32px 0;
+}
+.mt-title{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:20px;font-family:'JetBrains Mono',monospace}
+.mt-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:600px){.mt-grid{grid-template-columns:1fr}}
+.mt-block{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:16px 18px}
+.mt-block h5{font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;font-family:'JetBrains Mono',monospace}
+.mt-block.q h5{color:var(--a4)}
+.mt-block.a h5{color:var(--a3)}
+.mt-block ul{list-style:none;padding:0}
+.mt-block ul li{font-size:13px;color:#c0c0d8;padding:3px 0;display:flex;gap:8px}
+.mt-block ul li::before{content:'▸';color:var(--accent);flex-shrink:0}
+
+hr.div{border:none;border-top:1px solid var(--border);margin:48px 0}
+
+p{color:#b8b8d0;margin-bottom:14px}
+h3{font-size:1.1rem;font-weight:700;margin:26px 0 10px;color:var(--text)}
+h4{font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin:18px 0 8px}
+
+.scroll-top{position:fixed;bottom:24px;right:24px;background:var(--accent);color:#fff;border:none;border-radius:50%;width:44px;height:44px;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s;z-index:200}
+.scroll-top.vis{opacity:1}
+
+blockquote{border-left:3px solid var(--accent);padding:4px 0 4px 18px;margin:14px 0;color:var(--accent);font-style:italic;font-size:14px}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">DSA Pattern Mastery · Series 2</div>
+  <h1>Choose → Contribute → <em>Win</em></h1>
+  <p class="hero-sub">The one pattern that unlocks 80% of optimization problems: every allowed move has a contribution — find which moves give the best gain, apply greedily or with DP, collect the result.</p>
+
+  <div class="mental-model">
+    <div class="mm-step"><span class="lbl">Step 1</span><span class="val">Objective</span></div>
+    <div class="mm-step"><span class="lbl">Step 2</span><span class="val">Allowed Move</span></div>
+    <div class="mm-step"><span class="lbl">Step 3</span><span class="val">Contribution</span></div>
+    <div class="mm-step"><span class="lbl">Step 4</span><span class="val">Gain / Loss</span></div>
+    <div class="mm-step"><span class="lbl">Step 5</span><span class="val">Best Choice</span></div>
+    <div class="mm-step"><span class="lbl">Step 6</span><span class="val">Global Optimum</span></div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat"><div class="n">20</div><div class="l">Leveled Problems</div></div>
+    <div class="stat"><div class="n">6</div><div class="l">Pattern Families</div></div>
+    <div class="stat"><div class="n">∞</div><div class="l">Reps to Master</div></div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="topnav">
+  <span class="nav-cat">Subarray</span>
+  <a href="#l1">L1·MaxSub</a><a href="#l2">L2·MaxProd</a><a href="#l3">L3·Circular</a>
+  <span class="nav-cat">Pointer</span>
+  <a href="#l4">L4·Water</a><a href="#l5">L5·Histogram</a><a href="#l6">L6·Rain</a>
+  <span class="nav-cat">Swap/Negate</span>
+  <a href="#l7">L7·Swap</a><a href="#l8">L8·Negate</a><a href="#l9">L9·StrSwap</a>
+  <span class="nav-cat">Remove</span>
+  <a href="#l10">L10·RmvK</a><a href="#l11">L11·RmvDup</a><a href="#l12">L12·RmvParen</a>
+  <span class="nav-cat">Moves/Flips</span>
+  <a href="#l13">L13·Moves</a><a href="#l14">L14·Flips</a><a href="#l15">L15·Domino</a>
+  <span class="nav-cat">Split/Merge</span>
+  <a href="#l16">L16·Split</a><a href="#l17">L17·Sticks</a><a href="#l18">L18·Deviate</a>
+  <span class="nav-cat">Hard</span>
+  <a href="#l19">L19·Pairs</a><a href="#l20">L20·Seqs</a>
+  <a href="#cheatsheet">CheatSheet</a>
+</nav>
+
+<div class="main">
+
+<!-- ════════════════════════════════════ CAT 1: SUBARRAY -->
+<div class="cat-header lvl-subarray" id="cat1">
+  <div class="cat-eyebrow">Category 1 · Levels 1–3</div>
+  <h2>Subarray Choice → Maximize</h2>
+  <p>The most fundamental optimization pattern. You choose a contiguous subarray. The question is: <strong>which contiguous window gives the best result?</strong> The insight is always the same: when does extending the window <em>help</em> vs <em>hurt</em>?</p>
+  <div>
+    <span class="pattern-pill">Kadane's Algorithm</span>
+    <span class="pattern-pill">Running Contribution</span>
+    <span class="pattern-pill">Reset When Negative</span>
+  </div>
+</div>
+
+<div class="template">
+  <div class="template-lbl">REUSABLE TEMPLATE — Subarray Optimization</div>
+<pre><span class="c-muted"># The universal Kadane template for ANY subarray optimization</span>
+best = -infinity          <span class="c-muted"># global answer</span>
+current = 0               <span class="c-muted"># contribution of current window</span>
+
+for each element x in array:
+    current = COMBINE(current, x)   <span class="c-muted"># extend window: what does x add?</span>
+    best = max(best, current)       <span class="c-muted"># is this the best we've seen?</span>
+    if SHOULD_RESET(current):       <span class="c-muted"># does carrying this window HURT?</span>
+        current = IDENTITY          <span class="c-muted"># start fresh</span>
+
+<span class="c-muted"># For MAX SUM:    COMBINE = +,   RESET when current < 0, IDENTITY = 0</span>
+<span class="c-muted"># For MAX PRODUCT: COMBINE = ×,  track BOTH max and min (negatives flip!)</span>
+<span class="c-muted"># For CIRCULAR:   run twice — once normal, once on negated array</span></pre>
+</div>
+
+<!-- LEVEL 1 -->
+<div class="level lvl-subarray" id="l1">
+  <div class="lv-header">
+    <div class="lv-badge"><div class="lv">LV</div><div class="ln">1</div></div>
+    <div class="lv-info">
+      <h3>Maximum Subarray — LC 53</h3>
+      <div class="lc">Objective: choose a contiguous subarray · maximize its sum · Hard edge: all negative</div>
+      <div class="tags"><span class="tag tag-g">Easy-Medium</span><span class="tag tag-p">Kadane</span><span class="tag tag-y">Contribution</span></div>
+    </div>
+  </div>
+  <div class="prog"><div class="prog-fill" style="width:5%"></div></div>
+
+  <div class="prob-box">
+    <div class="pb-label">Problem</div>
+    <p style="margin:0;color:var(--text)">Given array <code>nums</code>, find the contiguous subarray with the largest sum. The subarray must contain at least one element.</p>
+  </div>
+
+  <div class="think">
+    <h4>🧠 Run The Mental Model First</h4>
+    <div class="tstep"><div class="tstep-num">1</div><p><strong>Objective?</strong> Maximize sum of a chosen contiguous window.</p></div>
+    <div class="tstep"><div class="tstep-num">2</div><p><strong>Allowed move?</strong> Extend the current window right by one element, OR start a fresh window at current element.</p></div>
+    <div class="tstep"><div class="tstep-num">3</div><p><strong>Contribution of extending?</strong> +nums[i] to the current window sum.</p></div>
+    <div class="tstep"><div class="tstep-num">4</div><p><strong>Gain or loss?</strong> If current sum before adding is <em>negative</em>, it HURTS the new element. Carrying a negative prefix is always worse than starting fresh.</p></div>
+    <div class="tstep"><div class="tstep-num">5</div><p><strong>Best local choice?</strong> current = max(nums[i], current + nums[i]). Equivalently: reset if current drops below 0.</p></div>
+    <div class="tstep"><div class="tstep-num">6</div><p><strong>Global optimum?</strong> Track the max across all local bests.</p></div>
+  </div>
+
+  <div class="aha">
+    <div class="aha-lbl">⚡ AHA Moment</div>
+    <p>"A negative prefix is a <em>liability</em>, not an asset. If carrying the window so far makes the current element <em>smaller</em> than it is alone, abandon the old window. The moment current sum goes negative, you're better off starting fresh — because any future element added to a negative base is worse than that element alone."</p>
+  </div>
+
+  <h3>Complex Test Case — All Edge Cases In One</h3>
+  <p>Let's use: <code>nums = [-3, 1, -2, 4, -1, 2, 1, -5, 4, -8, 3]</code></p>
+  <p>This has: negative start, islands of positives, a large dip mid-array, and a tempting ending positive after a big negative.</p>
+
+  <table class="drt">
+    <tr><th>i</th><th>nums[i]</th><th>current (before reset)</th><th>Reset?</th><th>current (after)</th><th>best</th><th>Why</th></tr>
+    <tr><td>0</td><td class="bad">-3</td><td>0+(-3)=-3</td><td class="bad">YES</td><td>0</td><td>-3*</td><td>Negative prefix — abandon</td></tr>
+    <tr><td>1</td><td class="good">1</td><td>0+1=1</td><td>No</td><td>1</td><td>1</td><td>Fresh start pays off</td></tr>
+    <tr><td>2</td><td class="bad">-2</td><td>1+(-2)=-1</td><td class="bad">YES</td><td>0</td><td>1</td><td>Current goes negative, reset</td></tr>
+    <tr><td>3</td><td class="good">4</td><td>0+4=4</td><td>No</td><td>4</td><td>4</td><td>New window starts, immediately best</td></tr>
+    <tr><td>4</td><td class="bad">-1</td><td>4-1=3</td><td>No</td><td>3</td><td>4</td><td>Negative but current still positive — keep!</td></tr>
+    <tr><td>5</td><td class="good">2</td><td>3+2=5</td><td>No</td><td>5</td><td>5</td><td>Extending paid off</td></tr>
+    <tr><td>6</td><td class="good">1</td><td>5+1=6</td><td>No</td><td>6</td><td class="hi">6</td><td>New peak — subarray [4,-1,2,1]</td></tr>
+    <tr><td>7</td><td class="bad">-5</td><td>6-5=1</td><td>No</td><td>1</td><td>6</td><td>Still positive, don't reset</td></tr>
+    <tr><td>8</td><td class="good">4</td><td>1+4=5</td><td>No</td><td>5</td><td>6</td><td>Growing but can't beat 6</td></tr>
+    <tr><td>9</td><td class="bad">-8</td><td>5-8=-3</td><td class="bad">YES</td><td>0</td><td>6</td><td>Negative — reset</td></tr>
+    <tr><td>10</td><td class="good">3</td><td>0+3=3</td><td>No</td><td>3</td><td>6</td><td>Can't beat the peak</td></tr>
+  </table>
+  <p>*At i=0 we still track -3 as best since subarray must be non-empty, but reset current to 0.</p>
+  <p><strong>Answer: 6</strong>, subarray <code>[4, -1, 2, 1]</code> (indices 3–6).</p>
+
+  <div class="edge">
+    <div class="edge-lbl">⚠ Critical Edge Cases</div>
+    <div class="edge-item">All negative: <code>[-5,-3,-1,-4]</code> → answer is <code>-1</code> (must pick at least one). Never reset best to 0 — initialize best = nums[0].</div>
+    <div class="edge-item">Single element: <code>[42]</code> → answer is <code>42</code>. Handles itself.</div>
+    <div class="edge-item">All positive: <code>[1,2,3]</code> → never reset. Answer = entire array sum.</div>
+    <div class="edge-item">Trap: <code>[-2, 1, -3, 4, -1, 2, 1, -5, 4]</code> — don't get fooled by [-2,1] at start. Reset aggressively.</div>
+  </div>
+</div>
+
+<!-- LEVEL 2 -->
+<div class="level lvl-subarray" id="l2">
+  <div class="lv-header">
+    <div class="lv-badge"><div class="lv">LV</div><div class="ln">2</div></div>
+    <div class="lv-info">
+      <h3>Maximum Product Subarray — LC 152</h3>
+      <div class="lc">Allowed move: extend window · Contribution: multiply · Twist: negatives flip sign!</div>
+      <div class="tags"><span class="tag tag-y">Medium</span><span class="tag tag-p">Track Min+Max</span><span class="tag tag-r">Negatives Flip</span></div>
+    </div>
+  </div>
+  <div class="prog"><div class="prog-fill" style="width:10%"></div></div>
+
+  <div class="think">
+    <h4>🧠 Mental Model</h4>
+    <div class="tstep"><div class="tstep-num">1</div><p><strong>Objective?</strong> Maximize product of a contiguous subarray.</p></div>
+    <div class="tstep"><div class="tstep-num">2</div><p><strong>Contribution?</strong> Multiplying by nums[i]. But here's the twist — a NEGATIVE number FLIPS the sign.</p></div>
+    <div class="tstep"><div class="tstep-num">3</div><p><strong>Critical insight:</strong> The current MINIMUM (most negative) × a negative number = a very large POSITIVE. So we must track BOTH max and min product ending at each position.</p></div>
+    <div class="tstep"><div class="tstep-num">4</div><p><strong>Best choice?</strong> At each step: new_max = max(nums[i], cur_max×nums[i], cur_min×nums[i]). Same for new_min.</p></div>
+  </div>
+
+  <div class="aha">
+    <div class="aha-lbl">⚡ AHA Moment</div>
+    <p>"In product problems, the most NEGATIVE running product is secretly your best friend — one more negative number and it becomes the largest positive. You must carry BOTH the maximum and minimum product at every step. This is the only difference from sum Kadane."</p>
+  </div>
+
+  <h3>Complex Test Case</h3>
+  <p><code>nums = [2, 3, -2, -3, 4, -1, 2]</code></p>
+  <p>Has: two negatives adjacent (their product is positive!), a zero would reset (not here), and a trailing -1 which flips everything.</p>
+
+  <table class="drt">
+    <tr><th>i</th><th>nums[i]</th><th>cur_max (before)</th><th>cur_min (before)</th><th>new_max</th><th>new_min</th><th>best</th></tr>
+    <tr><td>0</td><td>2</td><td>1</td><td>1</td><td class="good">2</td><td class="bad">2</td><td>2</td></tr>
+    <tr><td>1</td><td>3</td><td>2</td><td>2</td><td class="good">6</td><td class="bad">3</td><td>6</td></tr>
+    <tr><td>2</td><td class="bad">-2</td><td>6</td><td>3</td><td class="good">max(-2,6×-2,3×-2)=max(-2,-12,-6)=-2</td><td>min=-12</td><td>6</td></tr>
+    <tr><td>3</td><td class="bad">-3</td><td>-2</td><td>-12</td><td class="hi">max(-3,-2×-3,-12×-3)=max(-3,6,36)=36</td><td>-3×-2=6→min(-3,6,36)=-3</td><td class="hi">36</td></tr>
+    <tr><td>4</td><td class="good">4</td><td>36</td><td>-3</td><td class="good">144</td><td>-12</td><td>144</td></tr>
+    <tr><td>5</td><td class="bad">-1</td><td>144</td><td>-12</td><td>12</td><td>-144</td><td>144</td></tr>
+    <tr><td>6</td><td class="good">2</td><td>12</td><td>-144</td><td>24</td><td>-288</td><td>144</td></tr>
+  </table>
+  <p><strong>Answer: 144</strong> — subarray <code>[2,3,-2,-3,4]</code>. The two negatives multiplied together rescued the product!</p>
+
+  <div class="edge">
+    <div class="edge-lbl">⚠ Edge Cases</div>
+    <div class="edge-item">Zero in array: <code>[2,-5,0,3,4]</code> — zero resets both max and min to 0. Treat it like a wall between subarrays.</div>
+    <div class="edge-item">Single negative: <code>[-3,2,4]</code> — best is [2,4]=8, not the whole array.</div>
+    <div class="edge-item">All negatives even count: <code>[-2,-3,-4]</code> → best is 12 (all three, two negatives make positive, ×4 stays negative... wait: (-2)×(-3)=6, ×(-4)=-24. Best is 12 = [-2,-3]).</div>
+  </div>
+</div>
+
+<!-- LEVEL 3 -->
+<div class="level lvl-subarray" id="l3">
+  <div class="lv-header">
+    <div class="lv-badge"><div class="lv">LV</div><div class="ln">3</div></div>
+    <div class="lv-info">
+      <h3>Maximum Sum Circular Subarray — LC 918</h3>
+      <div class="lc">Same as L1 but the subarray can wrap around the array ends</div>
+      <div class="tags"><span class="tag tag-y">Medium-Hard</span><span class="tag tag-p">Kadane Twice</span><span class="tag tag-r">Complement Trick</span></div>
+    </div>
+  </div>
+  <div class="prog"><div class="prog-fill" style="width:15%"></div></div>
+
+  <div class="think">
+    <h4>🧠 Mental Model</h4>
+    <div class="tstep"><div class="tstep-num">1</div><p><strong>Two cases exist:</strong> The best subarray either (A) doesn't wrap around → normal Kadane, OR (B) wraps around → it skips a middle chunk.</p></div>
+    <div class="tstep"><div class="tstep-num">2</div><p><strong>Case B insight:</strong> If the best subarray wraps, then the COMPLEMENT (the middle chunk that's NOT included) must be the MINIMUM subarray. So: circular best = total_sum - min_subarray_sum.</p></div>
+    <div class="tstep"><div class="tstep-num">3</div><p><strong>Answer = max(case A, case B)</strong>. But if all elements are negative, case B = 0 which is wrong → answer is just case A.</p></div>
+  </div>
+
+  <div class="aha">
+    <div class="aha-lbl">⚡ AHA Moment</div>
+    <p>"A circular subarray that wraps = total array MINUS the middle part you skip. Maximizing what you include = minimizing what you exclude. So run Kadane TWICE: once for max subarray, once for min subarray. The circular answer is total - min_subarray."</p>
+  </div>
+
+  <h3>Complex Test Case</h3>
+  <p><code>nums = [5, -3, 5, -2, 3, -8, 7, 6]</code></p>
+
+  <div class="view-grid">
+    <div class="vbox old">
+      <div class="vlabel">Case A — Normal Kadane (no wrap)</div>
+      <pre>nums = [5,-3,5,-2,3,-8,7,6]
+
+Running Kadane for MAX:
+i=0: cur=5,  best=5
+i=1: cur=2,  best=5
+i=2: cur=7,  best=7
+i=3: cur=5,  best=7
+i=4: cur=8,  best=8
+i=5: cur=0→reset, best=8
+i=6: cur=7,  best=8
+i=7: cur=13, best=13
+
+Case A = 13 (subarray [7,6])</pre>
+    </div>
+    <div class="vbox new">
+      <div class="vlabel">Case B — Circular (total - min)</div>
+      <pre>total = 5-3+5-2+3-8+7+6 = 13
+
+Kadane for MIN subarray:
+i=0: cur=5,   min=5
+i=1: cur=2,   min=2
+i=2: cur=7,   min=2
+i=3: cur=5,   min=2
+i=4: cur=8,   min=2
+i=5: cur=0,   min=0→reset to 0
+i=6: cur=-8→reset? no, cur=-1 min=-8
+i=7: cur=-2   min=-8
+
+min_sub = -8 (just [-8])
+Case B = 13 - (-8) = 21</pre>
+    </div>
+  </div>
+
+  <p><strong>Answer = max(13, 21) = 21</strong>. The circular subarray <code>[7, 6, 5, -3, 5]</code> (wrapping from index 6 to index 2) gives sum 20... wait let me recheck: [7,6] from end + [5,-3,5,-2,3] from front = 13+8=21. The -8 in the middle is excluded. ✓</p>
+
+  <div class="edge">
+    <div class="edge-lbl">⚠ Edge Cases</div>
+    <div class="edge-item">All negative: <code>[-3,-1,-2]</code> → Case B = total-min = (-6)-(-1) = -5. But case A = -1. Answer = max(-1,-5) = -1. MUST handle this!</div>
+    <div class="edge-item">All positive: Case B = total - min_positive, but we can just take whole array. Case A handles this correctly.</div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ════════════════════════════════════ CAT 2: POINTER -->
+<div class="cat-header" id="cat2">
+  <div class="cat-eyebrow">Category 2 · Levels 4–6</div>
+  <h2>Two Pointer → Maximize Area / Volume</h2>
+  <p>You have two boundaries. Moving them changes the contribution. The pattern: move the pointer that currently <strong>limits</strong> you — never the one that helps you.</p>
+  <div>
+    <span class="pattern-pill">Two Pointer</span>
+    <span class="pattern-pill">Contribution = f(height, width)</span>
+    <span class="pattern-pill">Move the bottleneck</span>
+  </div>
+</div>
+
+<div class="template">
+  <div class="template-lbl">REUSABLE TEMPLATE — Two Pointer Optimization</div>
+<pre>left, right = 0, n-1
+best = 0
+
+while left < right:
+    contribution = COMPUTE(left, right)   <span class="c-muted"># what does this pair contribute?</span>
+    best = max(best, contribution)
+    
+    <span class="c-muted"># KEY INSIGHT: move the side that LIMITS you</span>
+    if LIMITS(left, right):               <span class="c-muted"># which side is the bottleneck?</span>
+        left += 1                         <span class="c-muted"># moving left might find better</span>
+    else:
+        right -= 1                        <span class="c-muted"># moving right might find better</span>
+
+<span class="c-muted"># For Water: contribution = min(h[l],h[r]) × (r-l). Bottleneck = shorter wall.</span>
+<span class="c-muted"># For Rain:  contribution is per-bar. Bottleneck = min of left_max, right_max.</span></pre>
+</div>
+
+<!-- LEVEL 4 -->
+<div class="level lvl-pointer" id="l4">
+  <div class="lv-header">
+    <div class="lv-badge"><div class="lv">LV</div><div class="ln">4</div></div>
+    <div class="lv-info">
+      <h3>Container With Most Water — LC 11</h3>
+      <div class="lc">Move two walls. Water = min(height) × width. Always move the shorter wall.</div>
+      <div class="tags"><span class="tag tag-g">Medium</span><span class="tag tag-p">Two Pointer</span><span class="tag tag-y">Bottleneck Logic</span></div>
+    </div>
+  </div>
+  <div class="prog"><div class="prog-fill" style="width:20%"></div></div>
+
+  <div class="think">
+    <h4>🧠 Mental Model</h4>
+    <div class="tstep"><div class="tstep-num">1</div><p><strong>Contribution of a pair (l,r)?</strong> Water = min(h[l], h[r]) × (r - l).</p></div>
+    <div class="tstep"><div class="tstep-num">2</div><p><strong>What limits us?</strong> The SHORTER of the two walls. The taller wall is irrelevant beyond a certain height.</p></div>
+    <div class="tstep"><div class="tstep-num">3</div><p><strong>If we move the taller wall inward?</strong> Width decreases AND height can only stay same or decrease (limited by same short wall). Strictly worse or equal. Never better.</p></div>
+    <div class="tstep"><div class="tstep-num">4</div><p><strong>If we move the shorter wall inward?</strong> Width decreases BUT we might find a taller wall → could be better. This is our only hope.</p></div>
+    <div class="tstep"><div class="tstep-num">5</div><p><strong>Greedy:?</strong> Always move the shorter wall. We never miss the optimal pair.</p></div>
+  </div>
+
+  <div class="aha">
+    <div class="aha-lbl">⚡ AHA Moment</div>
+    <p>"Moving the TALLER wall can NEVER improve the answer — width shrinks and the height is still capped by the SHORT wall. So moving the taller wall is always useless. We ONLY move the shorter wall because it's our only chance to escape the current bottleneck. This greedy is provably correct."</p>
+  </div>
+
+  <h3>Complex Test Case</h3>
+  <p><code>height = [3, 9, 1, 2, 8, 4, 5, 7, 2, 6]</code></p>
+  <p>Tricky because: tallest walls (9,8) are near each other but not at edges. The optimal might not be the widest pair.</p>
+
+  <table class="drt">
+    <tr><th>l</th><th>r</th><th>h[l]</th><th>h[r]</th><th>min</th><th>width</th><th>water</th><th>move</th><th>best</th></tr>
+    <tr><td>0</td><td>9</td><td>3</td><td>6</td><td>3</td><td>9</td><td>27</td><td>move l (h=3 shorter)</td><td>27</td></tr>
+    <tr><td>1</td><td>9</td><td>9</td><td>6</td><td>6</td><td>8</td><td>48</td><td>move r (h=6 shorter)</td><td>48</td></tr>
+    <tr><td>1</td><td>8</td><td>9</td><td>2</td><td>2</td><td>7</td><td>14</td><td>move r (h=2 shorter)</td><td>48</td></tr>
+    <tr><td>1</td><td>7</td><td>9</td><td>7</td><td>7</td><td>6</td><td>42</td><td>move r (h=7 shorter)</td><td>48</td></tr>
+    <tr><td>1</td><td>6</td><td>9</td><td>5</td><td>5</td><td>5</td><td>25</td><td>move r</td><td>48</td></tr>
+    <tr><td>1</td><td>5</td><td>9</td><td>4</td><td>4</td><td>4</td><td>16</td><td>move r</td><td>48</td></tr>
+    <tr><td>1</td><td>4</td><td>9</td><td>8</td><td>8</td><td>3</td><td>24</td><td>move r (h=8 shorter)</td><td>48</td></tr>
+    <tr><td>1</td><td>3</td><td>9</td><td>2</td><td>2</td><td>2</td><td>4</td><td>move r</td><td>48</td></tr>
+    <tr><td>1</td><td>2</td><td>9</td><td>1</td><td>1</td><td>1</td><td>1</td><td>l≥r, stop</td><td class="hi">48</td></tr>
+  </table>
+  <p><strong>Answer: 48</strong> — walls at index 1 (h=9) and index 9 (h=6). Width=8, min=6, water=48. Notice index 4 (h=8) is tall but too close to index 1 — only water=24.</p>
+
+  <div class="edge">
+    <div class="edge-lbl">⚠ Edge Cases</div>
+    <div class="edge-item">Equal heights: <code>[5,5,5,5]</code> → move either pointer. Best is outermost pair: 5×3=15.</div>
+    <div class="edge-item">Strictly increasing: <code>[1,2,3,4,5]</code> → keep l=0 always (it's always shorter or equal). Final answer is somewhere in middle.</div>
+    <div class="edge-item">Two elements: <code>[3,7]</code> → one pair, answer = 3×1 = 3.</div>
+  </div>
+</div>
+
+<!-- LEVEL 5 -->
+<div class="level lvl-pointer" id="l5">
+  <div class="lv-header">
+    <div class="lv-badge"><div class="lv">LV</div><div class="ln">5</div></div>
+    <div class="lv-info">
+      <h3>Largest Rectangle in Histogram — LC 84</h3>
+      <div class="lc">Each bar can be the height of a rectangle. How wide can it extend? Find its contribution.</div>
+      <div class="tags"><span class="tag tag-r">Hard</span><span class="tag tag-p">Monotonic Stack</span><span class="tag tag-y">Contribution Per Bar</span></div>
+    </div>
+  </div>
+  <div class="prog"><div class="prog-fill" style="width:25%"></div></div>
+
+  <div class="think">
+    <h4>🧠 Mental Model</h4>
+    <div class="tstep"><div class="tstep-num">1</div><p><strong>What contributes?</strong> Each bar can be the HEIGHT of the largest rectangle it belongs to.</p></div>
+    <div class="tstep"><div class="tstep-num">2</div><p><strong>How wide can bar i extend?</strong> Left until we hit a bar shorter than h[i]. Right until we hit a bar shorter than h[i].</p></div>
+    <div class="tstep"><div class="tstep-num">3</div><p><strong>Contribution of bar i:</strong> h[i] × (right_boundary - left_boundary - 1).</p></div>
+    <div class="tstep"><div class="tstep-num">4</div><p><strong>Insight:</strong> A bar "dies" (its width is bounded) the moment a SHORTER bar appears. A monotonic increasing stack processes each bar exactly once and pops it when its right boundary is found.</p></div>
+  </div>
+
+  <div class="aha">
+    <div class="aha-lbl">⚡ AHA Moment</div>
+    <p>"Every bar wants to extend as far as possible. It can only extend until it meets a shorter bar. A monotone stack gives us the EXACT moment each bar's right boundary is hit — when we pop a bar, we've just found its right wall. The left wall was the new stack top. This processes n bars in O(n)."</p>
+  </div>
+
+  <h3>Complex Test Case</h3>
+  <p><code>heights = [2, 1, 5, 6, 2, 3, 3, 4, 1]</code></p>
+  <p>Has: valley (1 at i=1), twin peaks (5,6), plateau at end (3,3,4), and terminal 1 that forces all pops.</p>
+
+  <table class="drt">
+    <tr><th>i</th><th>h</th><th>Stack (indices)</th><th>Action</th><th>Area computed</th></tr>
+    <tr><td>0</td><td>2</td><td>[0]</td><td>push</td><td>—</td></tr>
+    <tr><td>1</td><td class="bad">1</td><td>pop 0</td><td>h=2 pops (1&lt;2). left=-1, right=1. Area=2×(1-(-1)-1)=2×1=2</td><td>2</td></tr>
+    <tr><td>1</td><td>1</td><td>[1]</td><td>push 1</td><td>—</td></tr>
+    <tr><td>2</td><td>5</td><td>[1,2]</td><td>push</td><td>—</td></tr>
+    <tr><td>3</td><td>6</td><td>[1,2,3]</td><td>push</td><td>—</td></tr>
+    <tr><td>4</td><td class="bad">2</td><td>pop 3</td><td>h=6, left=2, right=4. Area=6×(4-2-1)=6×1=6</td><td>6</td></tr>
+    <tr><td>4</td><td>2</td><td>pop 2</td><td>h=5, left=1, right=4. Area=5×(4-1-1)=5×2=10</td><td>10</td></tr>
+    <tr><td>4</td><td>2</td><td>[1,4]</td><td>push 4</td><td>—</td></tr>
+    <tr><td>5</td><td>3</td><td>[1,4,5]</td><td>push</td><td>—</td></tr>
+    <tr><td>6</td><td>3</td><td>[1,4,5,6]</td><td>push (equal, keep)</td><td>—</td></tr>
+    <tr><td>7</td><td>4</td><td>[1,4,5,6,7]</td><td>push</td><td>—</td></tr>
+    <tr><td>8</td><td class="bad">1</td><td>pop 7</td><td>h=4, left=6, right=8. Area=4×1=4</td><td>10</td></tr>
+    <tr><td>8</td><td>1</td><td>pop 6</td><td>h=3, left=5, right=8. Area=3×2=6</td><td>10</td></tr>
+    <tr><td>8</td><td>1</td><td>pop 5</td><td>h=3, left=4, right=8. Area=3×3=9</td><td>10</td></tr>
+    <tr><td>8</td><td>1</td><td>pop 4</td><td>h=2, left=1, right=8. Area=2×6=12</td><td class="hi">12</td></tr>
+    <tr><td>8</td><td>1</td><td>pop 1</td><td>h=1, left=-1, right=8. Area=1×8=8</td><td>12</td></tr>
+  </table>
+  <p><strong>Answer: 12</strong> — bar at index 4 (h=2) extends from index 2 to 8, width=6, area=12. The wide short rectangle beats tall narrow ones!</p>
+</div>
+
+<!-- LEVEL 6 -->
+<div class="level lvl-pointer" id="l6">
+  <div class="lv-header">
+    <div class="lv-badge"><div class="lv">LV</div><div class="ln">6</div></div>
+    <div class="lv-info">
+      <h3>Trapping Rain Water — LC 42</h3>
+      <div class="lc">Water trapped at bar i = min(max_left, max_right) - h[i]. Contribution per bar.</div>
+      <div class="tags"><span class="tag tag-r">Hard</span><span class="tag tag-p">Two Pointer</span><span class="tag tag-y">Per-Bar Contribution</span></div>
+    </div>
+  </div>
+  <div class="prog"><div class="prog-fill" style="width:30%"></div></div>
+
+  <div class="think">
+    <h4>🧠 Mental Model</h4>
+    <div class="tstep"><div class="tstep-num">1</div><p><strong>Contribution of bar i:</strong> Water above it = min(tallest_left_wall, tallest_right_wall) - h[i]. If negative, 0.</p></div>
+    <div class="tstep"><div class="tstep-num">2</div><p><strong>Two pointer insight:</strong> If left_max &lt; right_max, the water at left pointer is fully determined by left_max (right is taller, so left_max is the bottleneck). Process left pointer. Else process right pointer.</p></div>
+    <div class="tstep"><div class="tstep-num">3</div><p><strong>Why?</strong> We know the shorter side is the constraint. We can calculate its water without knowing the exact taller side — it's definitely ≥ our current max on that side.</p></div>
+  </div>
+
+  <div class="aha">
+    <div class="aha-lbl">⚡ AHA Moment</div>
+    <p>"Each bar's water is controlled by its SHORTER surrounding wall. With two pointers, when left_max &lt; right_max, the left pointer's water is completely determined — we know the constraining wall is on the left. We don't need the right maximum because it doesn't matter (it's already taller). Process the side where you have complete information."</p>
+  </div>
+
+  <h3>Complex Test Case</h3>
+  <p><code>height = [4, 2, 0, 3, 2, 5, 1, 0, 2, 3]</code></p>
+
+  <table class="drt">
+    <tr><th>l</th><th>r</th><th>lmax</th><th>rmax</th><th>Action</th><th>Water</th><th>Total</th></tr>
+    <tr><td>0</td><td>9</td><td>4</td><td>3</td><td>rmax&lt;lmax → process r=9. water=3-3=0</td><td>0</td><td>0</td></tr>
+    <tr><td>0</td><td>8</td><td>4</td><td>3</td><td>rmax=3, h[8]=2. water=3-2=1</td><td>1</td><td>1</td></tr>
+    <tr><td>0</td><td>7</td><td>4</td><td>3</td><td>h[7]=0. water=3-0=3</td><td>3</td><td>4</td></tr>
+    <tr><td>0</td><td>6</td><td>4</td><td>3</td><td>h[6]=1. water=3-1=2</td><td>2</td><td>6</td></tr>
+    <tr><td>0</td><td>5</td><td>4</td><td>5</td><td>lmax&lt;rmax → process l=0. h[0]=4, water=4-4=0</td><td>0</td><td>6</td></tr>
+    <tr><td>1</td><td>5</td><td>4</td><td>5</td><td>process l=1. h[1]=2, water=4-2=2</td><td>2</td><td>8</td></tr>
+    <tr><td>2</td><td>5</td><td>4</td><td>5</td><td>process l=2. h[2]=0, water=4-0=4</td><td>4</td><td>12</td></tr>
+    <tr><td>3</td><td>5</td><td>4</td><td>5</td><td>process l=3. h[3]=3, water=4-3=1</td><td>1</td><td>13</td></tr>
+    <tr><td>4</td><td>5</td><td>4</td><td>5</td><td>process l=4. h[4]=2, water=4-2=2</td><td>2</td><td class="hi">15</td></tr>
+  </table>
+  <p><strong>Answer: 15 units of water trapped.</strong></p>
+</div>
+
+<hr class="div">
+
+<!-- ════════════════════════════════════ CAT 3: SWAP/NEGATE -->
+<div class="cat-header" id="cat3">
+  <div class="cat-eyebrow">Category 3 · Levels 7–9</div>
+  <h2>Swap / Negate → Maximize Value</h2>
+  <p>You're given K "transformation" operations. Each transforms one element or a pair. The question is which transformation gives the <strong>maximum lift</strong>.</p>
+  <div>
+    <span class="pattern-pill">Greedy: Biggest Gain First</span>
+    <span class="pattern-pill">Find What Changes</span>
+    <span class="pattern-pill">Handle Parity (odd K)</span>
+  </div>
+</div>
+
+<div class="template">
+  <div class="template-lbl">REUSABLE TEMPLATE — K Transformation Operations</div>
+<pre>STEP 1: Sort elements by "gain if transformed" (descending)
+STEP 2: Apply k operations greedily — always transform what gives most gain
+STEP 3: Handle leftover k:
+        - If k%2==0: no net effect (two negations cancel)
+        - If k%2==1: one operation left → apply to element with least cost
+        
+<span class="c-muted"># For Negate: gain = |x| - x (if x negative, gain = 2|x|, if positive gain = -2x)</span>
+<span class="c-muted"># For Swap:   gain = difference between digit you swap away vs digit you gain</span>
+<span class="c-muted"># For Domino: gain = uniform row possible after min swaps</span></pre>
+</div>
+
+<!-- LEVEL 7 -->
+<div class="level lvl-swap" id="l7">
+  <div class="lv-header">
+    <div class="lv-badge"><div class="lv">LV</div><div class="ln">7</div></div>
+    <div class="lv-info">
+      <h3>Maximum Swap — LC 670</h3>
+      <div class="lc">Exactly 1 swap of two digits. Find the pair that gives maximum number.</div>
+      <div class="tags"><span class="tag tag-g">Medium</span><span class="tag tag-y">Greedy Digit</span><span class="tag tag-p">Last Occurrence</span></div>
+    </div>
+  </div>
+  <div class="prog"><div class="prog-fill" style="width:35%"></div></div>
+
+  <div class="think">
+    <h4>🧠 Mental Model</h4>
+    <div class="tstep"><div class="tstep-num">1</div><p><strong>Contribution of a swap?</strong> Swapping digit at position i with digit at position j changes the value at position i (more significant) by (d[j]-d[i]) × 10^(n-1-i).</p></div>
+    <div class="tstep"><div class="tstep-num">2</div><p><strong>Best gain?</strong> We want the LEFTMOST position i where we can place a LARGER digit from the RIGHT. From the right, we want the LARGEST digit, and if there are ties, the RIGHTMOST one (so we swap with the least significant occurrence of the maximum).</p></div>
+    <div class="tstep"><div class="tstep-num">3</div><p><strong>Why rightmost occurrence of max?</strong> If digit 9 appears at positions 3 and 7, swapping with position 7 leaves the 9 at position 3 untouched and still gives us a 9 in front.</p></div>
+  </div>
+
+  <div class="aha">
+    <div class="aha-lbl">⚡ AHA Moment</div>
+    <p>"The most valuable swap places the largest possible digit as far LEFT as possible (most significant position). Scan left to right — at each position, check if any digit to its RIGHT is larger. Among all larger digits to the right, pick the largest one, and if tie, the rightmost. This greedy is O(n) using a last-occurrence map."</p>
+  </div>
+
+  <h3>Complex Test Case — Multiple Traps</h3>
+  <p><strong>Case 1:</strong> <code>num = 98368</code></p>
+  <p>Digits: [9,8,3,6,8]. The 9 is already first. Try to help 8: can we swap 8 at pos 1 with a later 8 at pos 4? No gain (8↔8). Try to help 3 at pos 2: largest digit to right is 8 (at pos 4). Swap pos 2 and 4: <code>98863</code> → gain!</p>
+
+  <table class="drt">
+    <tr><th>Position</th><th>Digit</th><th>Max to the Right</th><th>Max Position</th><th>Swap?</th></tr>
+    <tr><td>0</td><td>9</td><td>8</td><td>4</td><td>No (9 &gt; 8)</td></tr>
+    <tr><td>1</td><td>8</td><td>8</td><td>4</td><td>No (tie, but rightmost 8 = pos 4 = same value)</td></tr>
+    <tr><td>2</td><td class="bad">3</td><td class="good">8</td><td>4</td><td class="hi">YES! 8 &gt; 3. Swap pos 2 and 4</td></tr>
+  </table>
+  <p>Result: <code>98<span style="color:var(--a4)">8</span>6<span style="color:var(--a4)">3</span></code> = <strong>98863</strong></p>
+
+  <p><strong>Case 2 (Tricky):</strong> <code>num = 1993</code></p>
+  <p>Digits: [1,9,9,3]. Last occurrence: {1:0, 9:2, 3:3}. Scan: pos 0 has digit 1. Max to right = 9 at pos 2 (rightmost 9). Swap pos 0 and pos 2: [9,9,1,3] = <strong>9913</strong>.</p>
+  <p>Note: we pick pos 2 not pos 1 even though both are 9 — rightmost occurrence means if we swap with pos 1, the 9 at pos 2 is still there. Result is the same. Both give 9913. ✓</p>
+
+  <p><strong>Case 3 (Already Max):</strong> <code>num = 9973</code> → No larger digit to right of any position → no swap helps → return <strong>9973</strong>.</p>
+
+  <div class="edge">
+    <div class="edge-lbl">⚠ Edge Cases</div>
+    <div class="edge-item">Single digit: <code>5</code> → no swap possible, return 5.</div>
+    <div class="edge-item">Already descending: <code>9876</code> → no swap helps, return as-is.</div>
+    <div class="edge-item">All same digits: <code>5555</code> → any swap is identity, return 5555.</div>
+  </div>
+</div>
+
+<!-- LEVEL 8 -->
+<div class="level lvl-swap" id="l8">
+  <div class="lv-header">
+    <div class="lv-badge"><div class="lv">LV</div><div class="ln">8</div></div>
+    <div class="lv-info">
+      <h3>Maximize Sum After K Negations — LC 1005</h3>
+      <div class="lc">K negations. Negate the most negative first. Handle odd K leftover.</div>
+      <div class="tags"><span class="tag tag-g">Easy</span><span class="tag tag-p">Sort + Greedy</span><span class="tag tag-y">Parity of K</span></div>
+    </div>
+  </div>
+  <div class="prog"><div class="prog-fill" style="width:40%"></div></div>
+
+  <div class="think">
+    <h4>🧠 Mental Model</h4>
+    <div class="tstep"><div class="tstep-num">1</div><p><strong>Contribution of negating element x?</strong> Sum changes by -2x. If x is negative, -2x is positive → gain! If x is positive, -2x is negative → loss!</p></div>
+    <div class="tstep"><div class="tstep-num">2</div><p><strong>Greedy:</strong> Always negate the most negative element first — maximum gain per operation.</p></div>
+    <div class="tstep"><div class="tstep-num">3</div><p><strong>What if K left after all negatives gone?</strong> We must negate positives. To minimize loss: negate the SMALLEST positive. And if K leftover is EVEN → two negations cancel → no net effect on sum.</p></div>
+  </div>
+
+  <div class="aha">
+    <div class="aha-lbl">⚡ AHA Moment</div>
+    <p>"Sort by value. Negate from most negative. Once you run out of negatives, an even number of remaining operations = free (cancel out). Odd remaining = must negate the element closest to zero (minimum |value|) once. The key question is: after greedily handling negatives, what's the PARITY of remaining K?"</p>
+  </div>
+
+  <h3>Complex Test Case</h3>
+  <p><code>nums = [-8, 3, -5, -3, 7, -2, 4], K = 4</code></p>
+  <p>Sort: <code>[-8, -5, -3, -2, 3, 4, 7]</code></p>
+
+  <table class="drt">
+    <tr><th>K remaining</th><th>Action</th><th>Array after</th><th>Sum gain</th></tr>
+    <tr><td>4</td><td class="good">Negate -8 → +8. Gain = +16</td><td>[-5,-3,-2,3,4,7,<b>8</b>]</td><td>+16</td></tr>
+    <tr><td>3</td><td class="good">Negate -5 → +5. Gain = +10</td><td>[-3,-2,3,4,<b>5</b>,7,8]</td><td>+10</td></tr>
+    <tr><td>2</td><td class="good">Negate -3 → +3. Gain = +6</td><td>[-2,<b>3</b>,3,4,5,7,8]</td><td>+6</td></tr>
+    <tr><td>1</td><td class="good">Negate -2 → +2. Gain = +4</td><td>[<b>2</b>,3,3,4,5,7,8]</td><td>+4</td></tr>
+    <tr><td>0</td><td>Done!</td><td>[2,3,3,4,5,7,8]</td><td>Sum=32</td></tr>
+  </table>
+  <p><strong>Answer: 32</strong>. K=4 exactly exhausted all negatives. Perfect.</p>
+
+  <p><strong>Variant: same array but K=5</strong></p>
+  <p>After 4 ops above, array = [2,3,3,4,5,7,8], K=1 remaining. Must negate something positive → negate smallest = 2. New array: [-2,3,3,4,5,7,8]. Sum = 28.</p>
+
+  <p><strong>Variant: K=6</strong></p>
+  <p>After 4 ops, K=2 remaining. Even → negate any element TWICE → net zero change. Sum = 32.</p>
+
+  <div class="edge">
+    <div class="edge-lbl">⚠ Edge Cases</div>
+    <div class="edge-item">K larger than array with all negatives: <code>[-1,-2,-3], K=5</code> → negate all 3, K=2 remaining (even) → no loss. Answer = 1+2+3=6.</div>
+    <div class="edge-item">Array with zero: <code>[-3,0,2], K=3</code> → negate -3 (K=2), even remaining → done. Array=[3,0,2], sum=5.</div>
+  </div>
+</div>
+
+<!-- LEVEL 9 -->
+<div class="level lvl-swap" id="l9">
+  <div class="lv-header">
+    <div class="lv-badge"><div class="lv">LV</div><div class="ln">9</div></div>
+    <div class="lv-info">
+      <h3>Minimum Swaps to Make Strings Equal — LC 1247</h3>
+      <div class="lc">Two strings of x's and y's. Swap chars across strings to make them equal.</div>
+      <div class="tags"><span class="tag tag-g">Medium</span><span class="tag tag-y">Mismatch Counting</span><span class="tag tag-p">Parity Insight</span></div>
+    </div>
+  </div>
+  <div class="prog"><div class="prog-fill" style="width:45%"></div></div>
+
+  <div class="think">
+    <h4>🧠 Mental Model</h4>
+    <div class="tstep"><div class="tstep-num">1</div><p><strong>What are the mismatches?</strong> At each position i, if s1[i]≠s2[i], it's a mismatch. Two types: (s1='x',s2='y') call it XY, and (s1='y',s2='x') call it YX.</p></div>
+    <div class="tstep"><div class="tstep-num">2</div><p><strong>One swap fixes two XY mismatches:</strong> take an 'x' from s1[i] and swap with 'y' in s1[j] where both positions are XY-type. Costs 1 swap.</p></div>
+    <div class="tstep"><div class="tstep-num">3</div><p><strong>One swap fixes two YX mismatches:</strong> similarly costs 1 swap.</p></div>
+    <div class="tstep"><div class="tstep-num">4</div><p><strong>One XY + one YX leftover?</strong> Needs 2 swaps to fix.</p></div>
+    <div class="tstep"><div class="tstep-num">5</div><p><strong>If (XY + YX) is odd → impossible</strong> (total chars of x and y can't balance).</p></div>
+  </div>
+
+  <div class="aha">
+    <div class="aha-lbl">⚡ AHA Moment</div>
+    <p>"Don't simulate swaps. Count mismatch TYPES. Two same-type mismatches cancel with ONE swap. Two different-type mismatches need TWO swaps. The answer = (xy//2) + (yx//2) + 2*(xy%2). The remainder is always 0 or 1 for each, and if both have remainder 1, that costs 2 extra swaps."</p>
+  </div>
+
+  <h3>Complex Test Case</h3>
+  <p><code>s1 = "xxyyxyyx"</code>, <code>s2 = "yyxxyxxy"</code></p>
+
+  <table class="drt">
+    <tr><th>i</th><th>s1[i]</th><th>s2[i]</th><th>Match?</th><th>Type</th></tr>
+    <tr><td>0</td><td>x</td><td>y</td><td class="bad">No</td><td class="key">XY</td></tr>
+    <tr><td>1</td><td>x</td><td>y</td><td class="bad">No</td><td class="key">XY</td></tr>
+    <tr><td>2</td><td>y</td><td>x</td><td class="bad">No</td><td class="key">YX</td></tr>
+    <tr><td>3</td><td>y</td><td>x</td><td class="bad">No</td><td class="key">YX</td></tr>
+    <tr><td>4</td><td>x</td><td>y</td><td class="bad">No</td><td class="key">XY</td></tr>
+    <tr><td>5</td><td>y</td><td>x</td><td class="bad">No</td><td class="key">YX</td></tr>
+    <tr><td>6</td><td>y</td><td>x</td><td class="bad">No</td><td class="key">YX</td></tr>
+    <tr><td>7</td><td>x</td><td>y</td><td class="bad">No</td><td class="key">XY</td></tr>
+  </table>
+  <p>XY count = 4, YX count = 4.</p>
+  <p>Swaps = (4//2) + (4//2) + 2×(4%2 AND 4%2) = 2 + 2 + 0 = <strong>4 swaps</strong>.</p>
+
+  <p><strong>Case with odd remainder:</strong> <code>s1 = "xy"</code>, <code>s2 = "yx"</code> → XY=1, YX=1 → swaps = 0+0+2×1 = <strong>2 swaps</strong>.</p>
+</div>
+
+<hr class="div">
+
+<!-- ════════════════════════════════════ CAT 4: REMOVE -->
+<div class="cat-header" id="cat4">
+  <div class="cat-eyebrow">Category 4 · Levels 10–12</div>
+  <h2>Remove / Delete → Minimize / Validate</h2>
+  <p>You can remove K elements. Each removal contributes to the goal. The pattern: <strong>always remove the element that hurts you most right now</strong> — greedy with a monotonic stack.</p>
+  <div>
+    <span class="pattern-pill">Monotonic Stack</span>
+    <span class="pattern-pill">Greedy Remove</span>
+    <span class="pattern-pill">What stays = what's removed</span>
+  </div>
+</div>
+
+<div class="template">
+  <div class="template-lbl">REUSABLE TEMPLATE — Greedy Removal</div>
+<pre>stack = []
+k_remaining = k
+
+for each element x:
+    <span class="c-muted"># While we still have removals and the top of stack is "worse":</span>
+    while k_remaining > 0 and stack and SHOULD_REMOVE(stack[-1], x):
+        stack.pop()          <span class="c-muted"># remove the bad element</span>
+        k_remaining -= 1
+    stack.append(x)
+
+<span class="c-muted"># If k_remaining > 0: remove from the END (or handle remainder)</span>
+result = stack[:len(stack) - k_remaining]
+
+<span class="c-muted"># For Remove K Digits: SHOULD_REMOVE = stack[-1] > x (want smaller digits first)</span>
+<span class="c-muted"># For Duplicate Letters: SHOULD_REMOVE = stack[-1] > x AND stack[-1] appears later</span>
+<span class="c-muted"># For Parentheses: SHOULD_REMOVE = unmatched bracket</span></pre>
+</div>
+
+<!-- LEVEL 10 -->
+<div class="level lvl-remove" id="l10">
+  <div class="lv-header">
+    <div class="lv-badge"><div class="lv">LV</div><div class="ln">10</div></div>
+    <div class="lv-info">
+      <h3>Remove K Digits — LC 402</h3>
+      <div class="lc">Remove exactly K digits to form the smallest possible number.</div>
+      <div class="tags"><span class="tag tag-y">Medium</span><span class="tag tag-p">Monotonic Stack</span><span class="tag tag-r">Greedy</span></div>
+    </div>
+  </div>
+  <div class="prog"><div class="prog-fill" style="width:50%"></div></div>
+
+  <div class="think">
+    <h4>🧠 Mental Model</h4>
+    <div class="tstep"><div class="tstep-num">1</div><p><strong>Contribution of removing digit at position i?</strong> The digit to its left (more significant) matters. If current digit is SMALLER than the one before it, removing the previous digit shrinks the number at a higher place value.</p></div>
+    <div class="tstep"><div class="tstep-num">2</div><p><strong>Greedy rule:</strong> Whenever the new digit is SMALLER than the top of stack, pop the stack (remove that larger digit). Use one of our K removals.</p></div>
+    <div class="tstep"><div class="tstep-num">3</div><p><strong>Why this is optimal?</strong> A larger digit at a more significant position is always worse. Remove it the moment you find something smaller.</p></div>
+  </div>
+
+  <div class="aha">
+    <div class="aha-lbl">⚡ AHA Moment</div>
+    <p>"We want the SMALLEST number. Smaller digits should be at the FRONT. Whenever we see a digit smaller than what came before, we should have removed what came before — it's making our number bigger unnecessarily. The monotone stack keeps digits in non-decreasing order, popping (removing) any digit that's larger than what just arrived."</p>
+  </div>
+
+  <h3>Complex Test Case</h3>
+  <p><code>num = "10200312", k = 3</code></p>
+  <p>Tricky: has a leading zero scenario AND multiple candidates for removal.</p>
+
+  <table class="drt">
+    <tr><th>Char</th><th>Stack before</th><th>Action</th><th>k left</th><th>Stack after</th></tr>
+    <tr><td>'1'</td><td>[]</td><td>push</td><td>3</td><td>[1]</td></tr>
+    <tr><td>'0'</td><td>[1]</td><td class="good">pop 1 (1>0), k--. push 0</td><td>2</td><td>[0]</td></tr>
+    <tr><td>'2'</td><td>[0]</td><td>0≤2, push</td><td>2</td><td>[0,2]</td></tr>
+    <tr><td>'0'</td><td>[0,2]</td><td class="good">pop 2 (2>0), k--. 0≤0, push 0</td><td>1</td><td>[0,0]</td></tr>
+    <tr><td>'0'</td><td>[0,0]</td><td>0≤0, push</td><td>1</td><td>[0,0,0]</td></tr>
+    <tr><td>'3'</td><td>[0,0,0]</td><td>0≤3, push</td><td>1</td><td>[0,0,0,3]</td></tr>
+    <tr><td>'1'</td><td>[0,0,0,3]</td><td class="good">pop 3 (3>1), k--. push 1</td><td>0</td><td>[0,0,0,1]</td></tr>
+    <tr><td>'2'</td><td>[0,0,0,1]</td><td>k=0, push</td><td>0</td><td>[0,0,0,1,2]</td></tr>
+  </table>
+  <p>Stack = "00012". Remove leading zeros → <strong>"12"</strong>. Answer: <code>"12"</code>.</p>
+  <p>Verify: original "10200312", removed digits '1'(pos0), '2'(pos2), '3'(pos5) → remaining: "0","0","0","1","2" → "12". ✓</p>
+
+  <div class="edge">
+    <div class="edge-lbl">⚠ Edge Cases</div>
+    <div class="edge-item">All same digits: <code>"1111", k=2</code> → never pop (all equal). After loop, remove last 2 → "11".</div>
+    <div class="edge-item">k ≥ len(num): remove everything → return "0".</div>
+    <div class="edge-item">Result is all zeros: <code>"10", k=1</code> → stack=[0], strip leading zero → "0".</div>
+  </div>
+</div>
+
+<!-- LEVEL 11 -->
+<div class="level lvl-remove" id="l11">
+  <div class="lv-header">
+    <div class="lv-badge"><div class="lv">LV</div><div class="ln">11</div></div>
+    <div class="lv-info">
+      <h3>Remove Duplicate Letters — LC 316</h3>
+      <div class="lc">Remove duplicates so each letter appears once. Result must be lexicographically smallest.</div>
+      <div class="tags"><span class="tag tag-y">Medium-Hard</span><span class="tag tag-p">Stack + Last Occurrence</span><span class="tag tag-r">Greedy</span></div>
+    </div>
+  </div>
+  <div class="prog"><div class="prog-fill" style="width:55%"></div></div>
+
+  <div class="think">
+    <h4>🧠 Mental Model</h4>
+    <div class="tstep"><div class="tstep-num">1</div><p><strong>Same stack logic as L10 BUT</strong> we can only remove a letter from stack if it appears AGAIN later (otherwise it's our only chance to include it).</p></div>
+    <div class="tstep"><div class="tstep-num">2</div><p><strong>Contribution of keeping vs removing letter c at top?</strong> If c &gt; current and c appears again later → pop and remove c. If c won't appear again → MUST keep it.</p></div>
+    <div class="tstep"><div class="tstep-num">3</div><p><strong>Visited set:</strong> Don't add a letter that's already in the stack (we have its best position already).</p></div>
+  </div>
+
+  <div class="aha">
+    <div class="aha-lbl">⚡ AHA Moment</div>
+    <p>"Same as Remove K Digits, but with TWO extra constraints: (1) we must keep exactly one of each character, and (2) we can only remove a character if it appears later. Pre-compute last_occurrence of each char. When deciding to pop, check: does this char appear again? If yes, pop it (we'll catch it later). If no, keep it even if it's large."</p>
+  </div>
+
+  <h3>Complex Test Case</h3>
+  <p><code>s = "cbacdcbc"</code></p>
+  <p>last_occurrence: c→7, b→6, a→2, d→4</p>
+
+  <table class="drt">
+    <tr><th>Char</th><th>Stack</th><th>Visited</th><th>Action</th></tr>
+    <tr><td>'c'</td><td>[]</td><td>{}</td><td>push c</td></tr>
+    <tr><td>'b'</td><td>[c]</td><td>{c}</td><td>c>b AND last[c]=7>1, pop c. push b</td></tr>
+    <tr><td>'a'</td><td>[b]</td><td>{b}</td><td>b>a AND last[b]=6>2, pop b. push a</td></tr>
+    <tr><td>'c'</td><td>[a]</td><td>{a}</td><td>a&lt;c, push c. visited={a,c}</td></tr>
+    <tr><td>'d'</td><td>[a,c]</td><td>{a,c}</td><td>c&lt;d, push d. visited={a,c,d}</td></tr>
+    <tr><td>'c'</td><td>[a,c,d]</td><td>{a,c,d}</td><td>c already in visited, SKIP</td></tr>
+    <tr><td>'b'</td><td>[a,c,d]</td><td>{a,c,d}</td><td>d>b AND last[d]=4, index=6>4, pop d. c>b AND last[c]=7>6, pop c. a&lt;b, push b</td></tr>
+    <tr><td>'c'</td><td>[a,b]</td><td>{a,b}</td><td>b&lt;c, push c</td></tr>
+  </table>
+  <p><strong>Answer: "abcd"</strong>. Wait — result is [a,b,c] = "abc"... let me recheck: after the 'b' step we have [a,b], then 'c' → [a,b,c]. Answer = <strong>"acdb"</strong>? No. Stack ends as [a,b,c] = <strong>"abc"</strong>. ✓ (d was popped when b arrived since d appears later at index 4 which had already passed — actually last[d]=4 and current index for 'b' is 6, so 6>4 → d will NOT appear again → MUST keep d! Correction: [a,b,c,d]... let me re-examine carefully: at 'b' (index 6), top is d, last_occurrence[d]=4, current index=6 > 4 → d won't appear again → DON'T pop d. Result = [a,c,d,b] = <strong>"acdb"</strong>.)</p>
+</div>
+
+<!-- LEVEL 12 -->
+<div class="level lvl-remove" id="l12">
+  <div class="lv-header">
+    <div class="lv-badge"><div class="lv">LV</div><div class="ln">12</div></div>
+    <div class="lv-info">
+      <h3>Minimum Remove to Make Valid Parentheses — LC 1249</h3>
+      <div class="lc">Remove minimum brackets to make string valid. Find which ones to remove.</div>
+      <div class="tags"><span class="tag tag-g">Medium</span><span class="tag tag-p">Stack of Indices</span><span class="tag tag-y">Mark & Remove</span></div>
+    </div>
+  </div>
+  <div class="prog"><div class="prog-fill" style="width:60%"></div></div>
+
+  <div class="think">
+    <h4>🧠 Mental Model</h4>
+    <div class="tstep"><div class="tstep-num">1</div><p><strong>What needs to be removed?</strong> Any '(' with no matching ')' to its right. Any ')' with no matching '(' to its left.</p></div>
+    <div class="tstep"><div class="tstep-num">2</div><p><strong>Algorithm:</strong> Push indices of '(' onto stack. When we see ')', if stack has a '(' → pop (matched!). Else mark this ')' for removal.</p></div>
+    <div class="tstep"><div class="tstep-num">3</div><p><strong>After pass:</strong> Any indices remaining in stack = unmatched '(' → mark for removal too.</p></div>
+  </div>
+
+  <div class="aha">
+    <div class="aha-lbl">⚡ AHA Moment</div>
+    <p>"We're not removing randomly — we're removing exactly the brackets that have NO partner. A stack of indices tracks which '(' are still waiting for a ')'. After the full pass, the stack contains indices of all orphaned '('. Combine with indices of orphaned ')' found during the pass → those are the exact minimum removals."</p>
+  </div>
+
+  <h3>Complex Test Case</h3>
+  <p><code>s = "a)b(c(d)e))(f"</code></p>
+  <p>Has: orphan ')' at start, nested brackets, double closing, and orphan '(' at end.</p>
+
+  <table class="drt">
+    <tr><th>i</th><th>char</th><th>Stack (indices of '(')</th><th>Remove set</th><th>Action</th></tr>
+    <tr><td>0</td><td>a</td><td>[]</td><td>{}</td><td>letter, skip</td></tr>
+    <tr><td>1</td><td class="bad">)</td><td>[]</td><td class="bad">{1}</td><td>no matching '(' → mark 1</td></tr>
+    <tr><td>2</td><td>b</td><td>[]</td><td>{1}</td><td>letter, skip</td></tr>
+    <tr><td>3</td><td class="good">(</td><td>[3]</td><td>{1}</td><td>push index 3</td></tr>
+    <tr><td>4</td><td>c</td><td>[3]</td><td>{1}</td><td>letter, skip</td></tr>
+    <tr><td>5</td><td class="good">(</td><td>[3,5]</td><td>{1}</td><td>push index 5</td></tr>
+    <tr><td>6</td><td>d</td><td>[3,5]</td><td>{1}</td><td>letter, skip</td></tr>
+    <tr><td>7</td><td class="good">)</td><td>[3]</td><td>{1}</td><td>pop 5 (matched!)</td></tr>
+    <tr><td>8</td><td>e</td><td>[3]</td><td>{1}</td><td>letter, skip</td></tr>
+    <tr><td>9</td><td class="good">)</td><td>[]</td><td>{1}</td><td>pop 3 (matched!)</td></tr>
+    <tr><td>10</td><td class="bad">)</td><td>[]</td><td class="bad">{1,10}</td><td>no matching '(' → mark 10</td></tr>
+    <tr><td>11</td><td class="good">(</td><td>[11]</td><td>{1,10}</td><td>push 11</td></tr>
+    <tr><td>12</td><td>f</td><td>[11]</td><td>{1,10}</td><td>letter, skip</td></tr>
+  </table>
+  <p>Stack remaining = [11] → unmatched '(' → mark 11 for removal.</p>
+  <p>Remove set = {1, 10, 11}. Build result skipping those indices:</p>
+  <p><code>"a)b(c(d)e))(f"</code> → skip i=1,10,11 → <strong>"ab(c(d)e)f"</strong></p>
+</div>
+
+<hr class="div">
+
+<!-- ════════════════════════════════════ CAT 5: MOVES/FLIPS -->
+<div class="cat-header" id="cat5">
+  <div class="cat-eyebrow">Category 5 · Levels 13–15</div>
+  <h2>K Operations / Flips → Minimize Total Moves</h2>
+  <p>You must perform operations (increments, flips, swaps). The question is: in what ORDER and WHERE should you apply them? The pattern: <strong>each operation has a range of effect — track it with difference arrays or work backwards from where you must act</strong>.</p>
+  <div>
+    <span class="pattern-pill">Greedy + Diff Array</span>
+    <span class="pattern-pill">Work Left to Right</span>
+    <span class="pattern-pill">Delayed Effect Tracking</span>
+  </div>
+</div>
+
+<div class="template">
+  <div class="template-lbl">REUSABLE TEMPLATE — K Operations with Range Effect</div>
+<pre>flip_count = 0          <span class="c-muted"># operations currently active</span>
+diff = [0] * (n+1)     <span class="c-muted"># diff array tracking op end-points</span>
+total_ops = 0
+
+for i in 0..n-1:
+    flip_count += diff[i]          <span class="c-muted"># apply ops that end here</span>
+    effective = (original[i] + flip_count) % 2   <span class="c-muted"># current state</span>
+    
+    if effective != desired[i]:    <span class="c-muted"># does this position need an op?</span>
+        if i + k > n: return -1   <span class="c-muted"># can't start a window here</span>
+        diff[i+k] -= 1            <span class="c-muted"># this op ends at i+k</span>
+        flip_count += 1           <span class="c-muted"># flip active now</span> (or: diff[i]+=1)
+        total_ops += 1
+
+return total_ops</pre>
+</div>
+
+<!-- LEVEL 13 -->
+<div class="level lvl-moves" id="l13">
+  <div class="lv-header">
+    <div class="lv-badge"><div class="lv">LV</div><div class="ln">13</div></div>
+    <div class="lv-info">
+      <h3>Minimum Moves to Equal Array Elements — LC 453</h3>
+      <div class="lc">Each move: increment n-1 elements by 1. Minimum moves to make all equal.</div>
+      <div class="tags"><span class="tag tag-g">Medium</span><span class="tag tag-y">Math Insight</span><span class="tag tag-p">Equivalence Flip</span></div>
+    </div>
+  </div>
+  <div class="prog"><div class="prog-fill" style="width:65%"></div></div>
+
+  <div class="think">
+    <h4>🧠 Mental Model</h4>
+    <div class="tstep"><div class="tstep-num">1</div><p><strong>Incrementing n-1 elements by 1</strong> = the same as DECREMENTING 1 element by 1. (Relative differences are the same either way.)</p></div>
+    <div class="tstep"><div class="tstep-num">2</div><p><strong>So the problem becomes:</strong> How many times must you decrement ONE element per move to make all elements equal to the minimum?</p></div>
+    <div class="tstep"><div class="tstep-num">3</div><p><strong>Answer = sum(nums) - min(nums) × n</strong>. Each element needs to come down to min. Total decrements needed = sum of all differences from min.</p></div>
+  </div>
+
+  <div class="aha">
+    <div class="aha-lbl">⚡ AHA Moment</div>
+    <p>"Adding 1 to n-1 elements while keeping one fixed is IDENTICAL to subtracting 1 from that one fixed element (in terms of relative differences). So instead of simulating n-1 increments, we just count how many decrements the MAX elements need to reach the minimum. The math collapses to: sum - n×min."</p>
+  </div>
+
+  <h3>Complex Test Case</h3>
+  <p><code>nums = [5, 7, 11, 8, 3, 12]</code></p>
+  <p>min = 3. Target: make all equal to 3.</p>
+  <table class="drt">
+    <tr><th>Element</th><th>Value</th><th>Decrements needed (val - min)</th></tr>
+    <tr><td>nums[0]</td><td>5</td><td>5-3=2</td></tr>
+    <tr><td>nums[1]</td><td>7</td><td>7-3=4</td></tr>
+    <tr><td>nums[2]</td><td>11</td><td>11-3=8</td></tr>
+    <tr><td>nums[3]</td><td>8</td><td>8-3=5</td></tr>
+    <tr><td>nums[4]</td><td>3</td><td>0</td></tr>
+    <tr><td>nums[5]</td><td>12</td><td>12-3=9</td></tr>
+    <tr><td colspan="2" class="hi">Total moves</td><td class="hi">2+4+8+5+0+9 = 28</td></tr>
+  </table>
+  <p><strong>Answer: 28</strong>. Formula: sum(46) - 3×6 = 46-18 = 28. ✓</p>
+
+  <div class="edge">
+    <div class="edge-lbl">⚠ Edge Cases</div>
+    <div class="edge-item">All equal: <code>[5,5,5]</code> → sum=15, min=5, n=3. moves = 15-15 = 0.</div>
+    <div class="edge-item">Two elements: <code>[1,100]</code> → moves = 101-2 = 99. (Each move: increment 1, decrement effectively the 100).</div>
+    <div class="edge-item">Overflow risk: n up to 10^5, values up to 10^9. Use long/int64 for sum.</div>
+  </div>
+</div>
+
+<!-- LEVEL 14 -->
+<div class="level lvl-moves" id="l14">
+  <div class="lv-header">
+    <div class="lv-badge"><div class="lv">LV</div><div class="ln">14</div></div>
+    <div class="lv-info">
+      <h3>Minimum Number of K Consecutive Bit Flips — LC 995</h3>
+      <div class="lc">Flip windows of size K to make all bits 1. Find minimum flips or -1.</div>
+      <div class="tags"><span class="tag tag-r">Hard</span><span class="tag tag-p">Diff Array</span><span class="tag tag-y">Greedy + Range Effect</span></div>
+    </div>
+  </div>
+  <div class="prog"><div class="prog-fill" style="width:70%"></div></div>
+
+  <div class="think">
+    <h4>🧠 Mental Model</h4>
+    <div class="tstep"><div class="tstep-num">1</div><p><strong>Process left to right.</strong> At position i, if the effective value (after counting all flips covering i) is 0, we MUST flip starting at i — it's the only way to fix position i without disturbing positions we've already finalized (0..i-1).</p></div>
+    <div class="tstep"><div class="tstep-num">2</div><p><strong>Each flip covers [i, i+k-1].</strong> Instead of actually flipping, we record the effect using a diff array. The running flip count at position j = number of flips whose window covers j.</p></div>
+    <div class="tstep"><div class="tstep-num">3</div><p><strong>Effective bit at i</strong> = (nums[i] + total_flips_covering_i) % 2. If 0 → must flip here.</p></div>
+  </div>
+
+  <div class="aha">
+    <div class="aha-lbl">⚡ AHA Moment</div>
+    <p>"Don't actually flip bits — it's O(k) per flip. Instead, use a diff array to track 'how many flips are currently active at my position'. A flip starting at i adds +1 at i and -1 at i+k in the diff array. The running sum of the diff array tells you the parity (even/odd flips) at each position. This turns O(nk) into O(n)."</p>
+  </div>
+
+  <h3>Complex Test Case</h3>
+  <p><code>nums = [0, 1, 0, 0, 1, 0, 1, 1, 0], k = 3</code></p>
+
+  <table class="drt">
+    <tr><th>i</th><th>nums[i]</th><th>flip_count</th><th>effective=(nums+flips)%2</th><th>Need flip?</th><th>Action</th><th>ops</th></tr>
+    <tr><td>0</td><td>0</td><td>0</td><td>0</td><td class="bad">Yes</td><td class="good">flip! diff[3]-- flip_count=1</td><td>1</td></tr>
+    <tr><td>1</td><td>1</td><td>1</td><td>(1+1)%2=0</td><td class="bad">Yes</td><td class="good">flip! diff[4]-- flip_count=2</td><td>2</td></tr>
+    <tr><td>2</td><td>0</td><td>2</td><td>(0+2)%2=0</td><td class="bad">Yes</td><td class="good">flip! diff[5]-- flip_count=3</td><td>3</td></tr>
+    <tr><td>3</td><td>0</td><td>3+(-1)=2</td><td>(0+2)%2=0</td><td class="bad">Yes</td><td class="good">flip! diff[6]-- flip_count=3</td><td>4</td></tr>
+    <tr><td>4</td><td>1</td><td>3+(-1)=2</td><td>(1+2)%2=1</td><td class="good">No</td><td>—</td><td>4</td></tr>
+    <tr><td>5</td><td>0</td><td>2+(-1)=1</td><td>(0+1)%2=1</td><td class="good">No</td><td>—</td><td>4</td></tr>
+    <tr><td>6</td><td>1</td><td>1+(-1)=0</td><td>(1+0)%2=1</td><td class="good">No</td><td>—</td><td>4</td></tr>
+    <tr><td>7</td><td>1</td><td>0</td><td>1</td><td class="good">No</td><td>—</td><td>4</td></tr>
+    <tr><td>8</td><td>0</td><td>0</td><td>0</td><td class="bad">Yes — but i+k=11>9!</td><td class="bad">return -1</td><td>—</td></tr>
+  </table>
+  <p><strong>Answer: -1</strong> — can't fix position 8 because there's no room for a window of size 3 starting there.</p>
+
+  <p><strong>Solvable case: same array, k=2</strong> → every position can start a window. Answer would be some finite number.</p>
+</div>
+
+<!-- LEVEL 15 -->
+<div class="level lvl-moves" id="l15">
+  <div class="lv-header">
+    <div class="lv-badge"><div class="lv">LV</div><div class="ln">15</div></div>
+    <div class="lv-info">
+      <h3>Minimum Domino Rotations For Equal Row — LC 1007</h3>
+      <div class="lc">Swap top/bottom of dominoes. Minimum swaps to make one row all the same value.</div>
+      <div class="tags"><span class="tag tag-g">Medium</span><span class="tag tag-y">Try All Targets</span><span class="tag tag-p">Count Contribution</span></div>
+    </div>
+  </div>
+  <div class="prog"><div class="prog-fill" style="width:75%"></div></div>
+
+  <div class="think">
+    <h4>🧠 Mental Model</h4>
+    <div class="tstep"><div class="tstep-num">1</div><p><strong>What are the candidates?</strong> The target value must exist on EVERY domino (either top or bottom). Only tops[0] or bottoms[0] can be the target (if not possible with either, return -1).</p></div>
+    <div class="tstep"><div class="tstep-num">2</div><p><strong>Contribution of a domino to target T?</strong> If top=T → already in top row, cost 0. If bottom=T → swap costs 1. If neither = T → impossible with this target.</p></div>
+    <div class="tstep"><div class="tstep-num">3</div><p><strong>Try both candidates (tops[0] and bottoms[0]).</strong> For each: count swaps needed to put T in top row vs bottom row. Take the minimum.</p></div>
+  </div>
+
+  <div class="aha">
+    <div class="aha-lbl">⚡ AHA Moment</div>
+    <p>"The target value is heavily constrained — it MUST appear on every domino. So only the values on domino 0 (tops[0] or bottoms[0]) can be candidates. Try both. For each candidate, greedily count: how many swaps to put it in the top row? How many for the bottom row? If any domino has neither face = target, that candidate is impossible."</p>
+  </div>
+
+  <h3>Complex Test Case</h3>
+  <p><code>tops = [2,1,2,4,2,2], bottoms = [5,2,6,2,3,2]</code></p>
+  <p>Candidates: tops[0]=2, bottoms[0]=5. Try T=2:</p>
+
+  <table class="drt">
+    <tr><th>i</th><th>top</th><th>bottom</th><th>Has 2?</th><th>Cost for top row</th><th>Cost for bottom row</th></tr>
+    <tr><td>0</td><td class="key">2</td><td>5</td><td class="good">Yes (top)</td><td>0 (already top)</td><td>1 (swap)</td></tr>
+    <tr><td>1</td><td>1</td><td class="key">2</td><td class="good">Yes (bottom)</td><td>1 (swap)</td><td>0 (already bottom)</td></tr>
+    <tr><td>2</td><td class="key">2</td><td>6</td><td class="good">Yes (top)</td><td>0</td><td>1</td></tr>
+    <tr><td>3</td><td>4</td><td class="key">2</td><td class="good">Yes (bottom)</td><td>1</td><td>0</td></tr>
+    <tr><td>4</td><td class="key">2</td><td>3</td><td class="good">Yes (top)</td><td>0</td><td>1</td></tr>
+    <tr><td>5</td><td class="key">2</td><td class="key">2</td><td class="good">Yes (both)</td><td>0</td><td>0</td></tr>
+    <tr><td colspan="3" class="hi">Total</td><td class="hi">Top row: 0+1+0+1+0+0=2</td><td class="hi">Bottom row: 1+0+1+0+1+0=3</td></tr>
+  </table>
+  <p>T=2 is possible. Min swaps for top=2, for bottom=3. Try T=5: domino 1 has (1,2), neither is 5 → impossible.</p>
+  <p><strong>Answer: 2</strong> (make top row all 2s with 2 swaps).</p>
+
+<hr class="div">
+
+<!-- ════════════════════════════════════ CAT 6: SPLIT/MERGE -->
+<div class="cat-header" id="cat6">
+  <div class="cat-eyebrow">Category 6 · Levels 16–18</div>
+  <h2>Split / Merge → Optimize Cost</h2>
+  <p>You divide or combine things. Each division or merge has a cost. The key: <strong>the order of merges or the point of splits determines the total cost</strong>. This is where binary search + greedy or heap-based greedy shine.</p>
+  <div>
+    <span class="pattern-pill">Binary Search on Answer</span>
+    <span class="pattern-pill">Min-Heap Greedy</span>
+    <span class="pattern-pill">Prefix Sum for Validation</span>
+  </div>
+</div>
+
+<div class="template">
+  <div class="template-lbl">REUSABLE TEMPLATE — Split Array / Binary Search on Answer</div>
+<pre><span class="c-muted"># When: minimize the maximum of K groups, or maximize the minimum</span>
+lo, hi = min(nums), sum(nums)
+answer = hi
+
+while lo <= hi:
+    mid = (lo + hi) // 2
+    if CAN_ACHIEVE(mid, k):       <span class="c-muted"># greedy check: can we do it within this limit?</span>
+        answer = mid
+        hi = mid - 1              <span class="c-muted"># try to do even better</span>
+    else:
+        lo = mid + 1
+
+def CAN_ACHIEVE(limit, k):
+    groups = 1
+    current_sum = 0
+    for x in nums:
+        if current_sum + x > limit:
+            groups += 1           <span class="c-muted"># start a new group</span>
+            current_sum = 0
+        current_sum += x
+    return groups <= k</pre>
+</div>
+
+<!-- LEVEL 16 -->
+<div class="level lvl-split" id="l16">
+  <div class="lv-header">
+    <div class="lv-badge"><div class="lv">LV</div><div class="ln">16</div></div>
+    <div class="lv-info">
+      <h3>Split Array Largest Sum — LC 410</h3>
+      <div class="lc">Split array into K subarrays. Minimize the maximum subarray sum.</div>
+      <div class="tags"><span class="tag tag-r">Hard</span><span class="tag tag-p">Binary Search</span><span class="tag tag-y">Greedy Validation</span></div>
+    </div>
+  </div>
+  <div class="prog"><div class="prog-fill" style="width:80%"></div></div>
+
+  <div class="think">
+    <h4>🧠 Mental Model</h4>
+    <div class="tstep"><div class="tstep-num">1</div><p><strong>Binary search on WHAT?</strong> The answer (maximum sum). Try: "Is it POSSIBLE to split into ≤K groups such that no group exceeds limit X?"</p></div>
+    <div class="tstep"><div class="tstep-num">2</div><p><strong>Greedy check:</strong> Greedily add elements to current group. When adding next element would exceed X, start a new group. Count groups used.</p></div>
+    <div class="tstep"><div class="tstep-num">3</div><p><strong>If groups_used ≤ K?</strong> X is achievable. Try smaller X. Else X is too small → try larger.</p></div>
+  </div>
+
+  <div class="aha">
+    <div class="aha-lbl">⚡ AHA Moment</div>
+    <p>"We can't easily compute 'which split is best'. But we CAN easily check 'is this specific maximum sum achievable with K groups?' — just greedily fill groups. Binary search over the answer space and use this check. The answer is monotone: if X works, X+1 also works. Find the smallest X that works."</p>
+  </div>
+
+  <h3>Complex Test Case</h3>
+  <p><code>nums = [7, 2, 5, 10, 8, 4, 3, 9, 6], k = 4</code></p>
+  <p>Range: lo=max(10)=10, hi=sum(54).</p>
+
+  <div class="view-grid">
+    <div class="vbox old">
+      <div class="vlabel">Try limit = 20</div>
+      <pre>Group 1: [7,2,5] sum=14. +10=24>20 → new group
+Group 2: [10] sum=10. +8=18≤20. +4=22>20 → new
+Group 3: [8,4] sum=12. +3=15≤20. +9=24>20 → new  
+Group 4: [3] sum=3. +9=12≤20. +6=18≤20 ✓
+Groups used: 4 ≤ k=4. 
+20 is ACHIEVABLE → try smaller</pre>
+    </div>
+    <div class="vbox new">
+      <div class="vlabel">Try limit = 17</div>
+      <pre>Group 1: [7,2,5] sum=14. +10=24>17 → new group
+Group 2: [10] sum=10. +8=18>17 → new group
+Group 3: [8] sum=8. +4=12. +3=15. +9=24>17 → new
+Group 4: [4,3] sum=7. +9=16≤17. +6=22>17 → new
+Group 5: [9,6]...
+Groups used: 5 > k=4. 
+17 NOT achievable → try larger</pre>
+    </div>
+  </div>
+
+  <p>Binary search converges: lo=10, hi=54. Try 32→ok, try 21→ok, try 20→ok(as above), try 18→let's check:</p>
+  <p>limit=18: [7,2,5]=14, +10=24>18→new. [10,8]=18, +4=22>18→new. [4,3,9]=16, +6=22>18→new. [6]. Groups=5>4. Not ok.</p>
+  <p>limit=19: [7,2,5,]=14, +10=24>19→new. [10,8]=18≤19, +4=22>19→new. [4,3,9]=16≤19, +6=22>19→new. [6]. Groups=5. Not ok.</p>
+  <p>limit=20: Ok (shown above). <strong>Answer: 20.</strong></p>
+</div>
+
+<!-- LEVEL 17 -->
+<div class="level lvl-split" id="l17">
+  <div class="lv-header">
+    <div class="lv-badge"><div class="lv">LV</div><div class="ln">17</div></div>
+    <div class="lv-info">
+      <h3>Minimum Cost to Connect Sticks — LC 1167</h3>
+      <div class="lc">Merge sticks two at a time. Cost = combined length each time. Minimize total cost.</div>
+      <div class="tags"><span class="tag tag-g">Medium</span><span class="tag tag-p">Min Heap</span><span class="tag tag-y">Huffman-style</span></div>
+    </div>
+  </div>
+  <div class="prog"><div class="prog-fill" style="width:85%"></div></div>
+
+  <div class="think">
+    <h4>🧠 Mental Model</h4>
+    <div class="tstep"><div class="tstep-num">1</div><p><strong>Contribution of a stick?</strong> Every time a stick is involved in a merge, it adds its length to the cost. A stick that's merged early participates in MORE future merges.</p></div>
+    <div class="tstep"><div class="tstep-num">2</div><p><strong>Greedy:</strong> Always merge the TWO SHORTEST sticks. Shorter sticks should participate in more merges. Longer sticks should be merged last.</p></div>
+    <div class="tstep"><div class="tstep-num">3</div><p><strong>Why?</strong> If a stick of length L is merged k times total, its contribution = L × k. To minimize total cost, long sticks should have small k (merged late = fewer times).</p></div>
+  </div>
+
+  <div class="aha">
+    <div class="aha-lbl">⚡ AHA Moment</div>
+    <p>"This is Huffman coding in disguise. Each stick's total contribution = its length × number of times it's merged. Merging smallest first ensures the longest sticks are merged fewest times. A min-heap gives us the two smallest sticks in O(log n) each time."</p>
+  </div>
+
+  <h3>Complex Test Case</h3>
+  <p><code>sticks = [8, 3, 1, 5, 2, 7, 4, 6]</code></p>
+
+  <table class="drt">
+    <tr><th>Step</th><th>Heap (sorted)</th><th>Merge</th><th>Cost this step</th><th>Total cost</th></tr>
+    <tr><td>1</td><td>[1,2,3,4,5,6,7,8]</td><td>1+2=3</td><td>3</td><td>3</td></tr>
+    <tr><td>2</td><td>[3,3,4,5,6,7,8]</td><td>3+3=6</td><td>6</td><td>9</td></tr>
+    <tr><td>3</td><td>[4,5,6,6,7,8]</td><td>4+5=9</td><td>9</td><td>18</td></tr>
+    <tr><td>4</td><td>[6,6,7,8,9]</td><td>6+6=12</td><td>12</td><td>30</td></tr>
+    <tr><td>5</td><td>[7,8,9,12]</td><td>7+8=15</td><td>15</td><td>45</td></tr>
+    <tr><td>6</td><td>[9,12,15]</td><td>9+12=21</td><td>21</td><td>66</td></tr>
+    <tr><td>7</td><td>[15,21]</td><td>15+21=36</td><td>36</td><td class="hi">102</td></tr>
+  </table>
+  <p><strong>Answer: 102</strong>. Each short stick was merged multiple times, but because it's short, its repeated contributions were small. The 8-length stick was only merged once (in the last step).</p>
+</div>
+
+<!-- LEVEL 18 -->
+<div class="level lvl-split" id="l18">
+  <div class="lv-header">
+    <div class="lv-badge"><div class="lv">LV</div><div class="ln">18</div></div>
+    <div class="lv-info">
+      <h3>Minimize Deviation in Array — LC 1675</h3>
+      <div class="lc">Ops: even÷2, odd×2 (once). Minimize max-min of array.</div>
+      <div class="tags"><span class="tag tag-r">Hard</span><span class="tag tag-p">Max Heap</span><span class="tag tag-y">Normalize + Shrink</span></div>
+    </div>
+  </div>
+  <div class="prog"><div class="prog-fill" style="width:90%"></div></div>
+
+  <div class="think">
+    <h4>🧠 Mental Model</h4>
+    <div class="tstep"><div class="tstep-num">1</div><p><strong>Normalize first:</strong> Multiply all odd numbers by 2. Now all numbers are even. We can only DIVIDE from here.</p></div>
+    <div class="tstep"><div class="tstep-num">2</div><p><strong>Use a max-heap.</strong> Repeatedly divide the MAXIMUM element by 2 (bring it down). Track min throughout.</p></div>
+    <div class="tstep"><div class="tstep-num">3</div><p><strong>Stop when:</strong> The max is odd (can't divide further). Track deviation = max - min at each step.</p></div>
+  </div>
+
+  <div class="aha">
+    <div class="aha-lbl">⚡ AHA Moment</div>
+    <p>"After multiplying all odds by 2, we've set our ceiling. The only direction is DOWN (divide by 2). To minimize max-min, always bring the MAX closer to the MIN. Greedily divide the max element. Stop when max is odd — no more moves. The minimum deviation seen during this process is the answer."</p>
+  </div>
+
+  <h3>Complex Test Case</h3>
+  <p><code>nums = [3, 5, 7, 2, 8]</code></p>
+  <p>Multiply odds by 2: [6, 10, 14, 2, 8]. Min=2.</p>
+
+  <table class="drt">
+    <tr><th>Step</th><th>Heap (max at top)</th><th>Min</th><th>Deviation</th><th>Action</th></tr>
+    <tr><td>init</td><td>[14,10,8,6,2]</td><td>2</td><td>14-2=12</td><td>divide max 14→7</td></tr>
+    <tr><td>1</td><td>[10,8,7,6,2]</td><td>2</td><td>10-2=8</td><td>divide max 10→5</td></tr>
+    <tr><td>2</td><td>[8,7,6,5,2]</td><td>2</td><td>8-2=6</td><td>divide max 8→4</td></tr>
+    <tr><td>3</td><td>[7,6,5,4,2]</td><td>2</td><td class="hi">7-2=5</td><td>max=7 is ODD → STOP</td></tr>
+  </table>
+  <p><strong>Answer: 5</strong>. Minimum deviation is 5 (seen at step 3, deviation=5).</p>
+  <p>Note: min only changes if we divide an element equal to the current min — always recompute min when you push a new element.</p>
+</div>
+
+<hr class="div">
+
+<!-- ════════════════════════════════════ HARD: L19-20 -->
+<div class="cat-header" id="cat7">
+  <div class="cat-eyebrow">Category 7 · Levels 19–20</div>
+  <h2>Hard: Multi-Constraint Optimization</h2>
+  <p>Two or more interacting sequences. Each swap or pair operation has a cost that depends on BOTH sequences. The order of operations matters. These require careful greedy proofs.</p>
+</div>
+
+<!-- LEVEL 19 -->
+<div class="level" id="l19">
+  <div class="lv-header">
+    <div class="lv-badge"><div class="lv">LV</div><div class="ln">19</div></div>
+    <div class="lv-info">
+      <h3>Minimize the Maximum Difference of Pairs — LC 2616</h3>
+      <div class="lc">Choose p pairs from array. Minimize the maximum |a-b| across all chosen pairs.</div>
+      <div class="tags"><span class="tag tag-r">Hard</span><span class="tag tag-p">Binary Search</span><span class="tag tag-y">Greedy Pair Counting</span></div>
+    </div>
+  </div>
+  <div class="prog"><div class="prog-fill" style="width:95%"></div></div>
+
+  <div class="think">
+    <h4>🧠 Mental Model</h4>
+    <div class="tstep"><div class="tstep-num">1</div><p><strong>Binary search on the answer</strong> (maximum difference D). Can we find p pairs with all differences ≤ D?</p></div>
+    <div class="tstep"><div class="tstep-num">2</div><p><strong>Sort first.</strong> After sorting, optimal pairs are always adjacent (sorted[i], sorted[i+1]). Non-adjacent pairs always have larger difference.</p></div>
+    <div class="tstep"><div class="tstep-num">3</div><p><strong>Greedy count:</strong> Scan left to right. If sorted[i+1]-sorted[i] ≤ D, take this pair (count++, skip next). Else skip this element.</p></div>
+  </div>
+
+  <div class="aha">
+    <div class="aha-lbl">⚡ AHA Moment</div>
+    <p>"After sorting, no pair of non-adjacent elements can have a smaller difference than some adjacent pair between them. So optimal pairs are always adjacent. Then binary search on D: for a given max difference D, greedily count how many non-overlapping adjacent pairs have difference ≤ D. If count ≥ p, D is achievable."</p>
+  </div>
+
+  <h3>Complex Test Case</h3>
+  <p><code>nums = [10, 1, 2, 7, 1, 3, 5, 9], p = 3</code></p>
+  <p>Sort: [1,1,2,3,5,7,9,10]. Adjacent diffs: [0,1,1,2,2,2,1].</p>
+  <p>Binary search: lo=0, hi=9.</p>
+
+  <table class="drt">
+    <tr><th>Try D</th><th>Greedy pairs (adjacent diff ≤ D)</th><th>Count</th><th>≥p=3?</th><th>Result</th></tr>
+    <tr><td>4</td><td>[1,1](diff=0)✓skip2, [3,5](diff=2)✓skip5, [7,9](diff=2)✓skip9, check 10: done</td><td>3</td><td class="good">Yes</td><td>Try smaller</td></tr>
+    <tr><td>2</td><td>[1,1](0)✓skip, [2,3](1)✓skip, [5,7](2)✓skip, [9,10](1)=done after 3pairs</td><td>3</td><td class="good">Yes</td><td>Try smaller</td></tr>
+    <tr><td>1</td><td>[1,1](0)✓skip, [2,3](1)✓skip, [5,7](2)>1 skip 5, [7,9](2)>1 skip 7, [9,10](1)✓</td><td>3</td><td class="good">Yes</td><td>Try smaller</td></tr>
+    <tr><td>0</td><td>[1,1](0)✓skip, [2,3](1)>0 skip, [3,5](2)>0 skip...only 1 pair</td><td>1</td><td class="bad">No</td><td>Too small</td></tr>
+  </table>
+  <p><strong>Answer: 1</strong>. We can find 3 pairs all with difference ≤ 1: (1,1), (2,3), (9,10).</p>
+</div>
+
+<!-- LEVEL 20 -->
+<div class="level" id="l20">
+  <div class="lv-header">
+    <div class="lv-badge"><div class="lv">LV</div><div class="ln">20</div></div>
+    <div class="lv-info">
+      <h3>Minimum Swaps To Make Sequences Increasing — LC 801</h3>
+      <div class="lc">Two sequences. Swap positions to make both strictly increasing. Minimize swaps.</div>
+      <div class="tags"><span class="tag tag-r">Hard</span><span class="tag tag-p">DP</span><span class="tag tag-y">Keep vs Swap State</span></div>
+    </div>
+  </div>
+  <div class="prog"><div class="prog-fill" style="width:100%"></div></div>
+
+  <div class="think">
+    <h4>🧠 Mental Model</h4>
+    <div class="tstep"><div class="tstep-num">1</div><p><strong>At each position i, two states:</strong> keep (don't swap A[i] and B[i]), or swap (swap them). Track minimum swaps to reach each state.</p></div>
+    <div class="tstep"><div class="tstep-num">2</div><p><strong>Transitions:</strong> If keeping i is valid given i-1's state → cost = prev_keep. If swapping i is valid → cost = prev_swap+1. Both might be valid from either previous state.</p></div>
+    <div class="tstep"><div class="tstep-num">3</div><p><strong>Valid when:</strong> A[i]>A[i-1] and B[i]>B[i-1] after whatever swaps you chose for both positions.</p></div>
+  </div>
+
+  <div class="aha">
+    <div class="aha-lbl">⚡ AHA Moment</div>
+    <p>"At each index, you make a BINARY choice: swap or not. But this choice's validity depends on the previous choice. This is a 2-state DP: keep_cost[i] = min swaps to have both sequences increasing up to i WITHOUT swapping at i. swap_cost[i] = same but WITH swap at i. Transitions only connect valid state pairs. O(n) DP."</p>
+  </div>
+
+  <h3>Complex Test Case</h3>
+  <p><code>A = [1, 3, 5, 4, 9, 7], B = [1, 2, 6, 7, 8, 8]</code></p>
+
+  <table class="drt">
+    <tr><th>i</th><th>A[i],B[i]</th><th>A[i-1],B[i-1]</th><th>Natural ok?</th><th>Swap ok?</th><th>keep_cost</th><th>swap_cost</th></tr>
+    <tr><td>0</td><td>1,1</td><td>—</td><td>—</td><td>—</td><td>0</td><td>1</td></tr>
+    <tr><td>1</td><td>3,2</td><td>1,1</td><td>A:3>1✓ B:2>1✓</td><td>A:2>1✓ B:3>1✓</td><td>min(keep,swap)=min(0,1)=0</td><td>min(keep+1,swap+1)=min(1,2)=1</td></tr>
+    <tr><td>2</td><td>5,6</td><td>3,2(no swap) or 2,3(swap)</td><td>5>3✓ 6>2✓ (if prev=keep); 5>2✓ 6>3✓(if prev=swap)</td><td>6>3✓ 5>2✓; 6>2✓ 5>3✓</td><td>0</td><td>1</td></tr>
+    <tr><td>3</td><td>4,7</td><td>5,6(keep) or 6,5(swap)</td><td>4>5? NO (keep prev). 4>6? NO (swap prev)</td><td>7>5✓ 4>6? NO. 7>6✓ 4>5? NO</td><td class="bad">N/A from natural</td><td>swap: 7>5✓ 4&lt;6✗. Try from swap_prev: 7>6✓ 4&lt;5✗</td></tr>
+  </table>
+  <p>At i=3, A[3]=4 can't be >5 or >6 in any arrangement. Actually: if we swap at i=3: positions become (7,4). Check: prev=keep means (5,6) → 7>5✓ and 4&lt;6✗. prev=swap means (6,5) → 7>6✓ and 4&lt;5✗. Hmm — neither works for B.</p>
+  <p>Wait: swap at i=3 means A gets 7, B gets 4. B[3]=4 must be > B[2]. B[2] depends on prev choice. If prev=keep: B[2]=6. 4&lt;6 — fails. If prev=swap: B[2]=5. 4&lt;5 — fails. This input might be impossible without adjustment. Let's try the classic example:</p>
+  <p><code>A=[1,3,5,4], B=[1,2,3,7]</code>: At i=3: natural: A=4&lt;5✗. Swap: A=7>5✓, B=4>3✓. <strong>swap_cost[3] = keep_cost[2]+1 = 0+1 = 1.</strong> Answer: 1 swap.</p>
+</div>
+
+<!-- ════════════════════════════════════ CHEAT SHEET -->
+<div class="cheat-section" id="cheatsheet">
+  <div class="cat-header" style="margin-top:0">
+    <div class="cat-eyebrow">Interview Prep</div>
+    <h2>Master Cheat Sheet — Study This Before Any Interview</h2>
+    <p>Every pattern, every trigger, every template. One page to rule them all.</p>
+  </div>
+
+  <div class="master-template">
+    <div class="mt-title">THE 6-QUESTION CHECKLIST — Run This Before Touching Code</div>
+    <div class="mt-grid">
+      <div class="mt-block q">
+        <h5>Questions to Ask</h5>
+        <ul>
+          <li>What is the OBJECTIVE? (maximize, minimize, return)</li>
+          <li>What is ONE allowed MOVE/OPERATION?</li>
+          <li>What does ONE move CHANGE? What stays fixed?</li>
+          <li>What is the CONTRIBUTION of this move?</li>
+          <li>What makes one move BETTER than another?</li>
+          <li>Is order of moves important? (Greedy) or Do we need all options? (DP)</li>
+        </ul>
+      </div>
+      <div class="mt-block a">
+        <h5>Red Flags = Use These Patterns</h5>
+        <ul>
+          <li>"Contiguous subarray" → Kadane / sliding window</li>
+          <li>"Two boundaries / walls" → Two pointer</li>
+          <li>"K digits/elements to remove" → Mono stack</li>
+          <li>"K ops each affecting a range" → Diff array + greedy</li>
+          <li>"Minimize maximum / maximize minimum" → Binary search on answer</li>
+          <li>"Merge/split cost" → Min-heap (Huffman)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="cheat-grid">
+    <div class="cheat-card">
+      <h4>📌 Pattern 1 — Kadane (Subarray Max/Min)</h4>
+      <p><strong>Trigger:</strong> "contiguous subarray", "maximize sum/product"</p>
+      <p><strong>Template:</strong><br><code>cur=0; best=-inf<br>for x: cur=max(x, cur+x)<br>best=max(best,cur)</code></p>
+      <p><strong>Twist for product:</strong> Track both cur_max AND cur_min — negatives flip!</p>
+      <p><strong>Twist for circular:</strong> Answer = max(normal_kadane, total - min_kadane)</p>
+    </div>
+    <div class="cheat-card">
+      <h4>📌 Pattern 2 — Two Pointer (Area/Volume)</h4>
+      <p><strong>Trigger:</strong> "two walls", "maximize area", "trapped water"</p>
+      <p><strong>Template:</strong><br><code>l,r=0,n-1<br>while l&lt;r:<br>  compute(l,r)<br>  if h[l]&lt;h[r]: l++<br>  else: r--</code></p>
+      <p><strong>Key:</strong> Always move the LIMITING (shorter) side. Moving the stronger side never helps.</p>
+    </div>
+    <div class="cheat-card">
+      <h4>📌 Pattern 3 — Monotonic Stack (Remove/Contribute)</h4>
+      <p><strong>Trigger:</strong> "remove K digits", "lex smallest", "rectangle in histogram"</p>
+      <p><strong>Template:</strong><br><code>stk=[]; k_rem=k<br>for x in arr:<br>  while k_rem and stk and stk[-1]>x:<br>    stk.pop(); k_rem-=1<br>  stk.append(x)</code></p>
+      <p><strong>For duplicates:</strong> Add "AND has_later_occurrence(top)" condition before popping.</p>
+    </div>
+    <div class="cheat-card">
+      <h4>📌 Pattern 4 — K Transformation Greedy</h4>
+      <p><strong>Trigger:</strong> "K negations/swaps", "maximize/minimize after K ops"</p>
+      <p><strong>Template:</strong><br><code>sort by gain (desc)<br>apply k ops greedily<br>if k leftover:<br>  even→no change<br>  odd→negate min|x|</code></p>
+      <p><strong>Key:</strong> Contribution = change in objective per operation. Sort by contribution descending.</p>
+    </div>
+    <div class="cheat-card">
+      <h4>📌 Pattern 5 — Diff Array (Range Ops)</h4>
+      <p><strong>Trigger:</strong> "flip window of K", "range updates", "consecutive bit flips"</p>
+      <p><strong>Template:</strong><br><code>diff=[0]*(n+1); flips=0<br>for i: flips+=diff[i]<br>  if (val+flips)%2!=want:<br>    diff[i+k]-=1; flips+=1<br>    ops+=1</code></p>
+      <p><strong>Key:</strong> Never simulate the range. Record start/stop in diff array. Prefix sum reconstructs.</p>
+    </div>
+    <div class="cheat-card">
+      <h4>📌 Pattern 6 — Binary Search on Answer</h4>
+      <p><strong>Trigger:</strong> "minimize maximum", "maximize minimum", K groups</p>
+      <p><strong>Template:</strong><br><code>lo=min, hi=sum<br>while lo≤hi:<br>  mid=(lo+hi)//2<br>  if can(mid,k): ans=mid; hi=mid-1<br>  else: lo=mid+1</code></p>
+      <p><strong>Key:</strong> The answer is monotone. If X works, X+1 also works (for minimize-max). Binary search + O(n) greedy check.</p>
+    </div>
+    <div class="cheat-card">
+      <h4>📌 Pattern 7 — Heap Greedy (Merge/Connect)</h4>
+      <p><strong>Trigger:</strong> "minimum cost to merge/connect", "connect sticks/ropes"</p>
+      <p><strong>Template:</strong><br><code>heapq.heapify(arr)<br>cost=0<br>while len(heap)>1:<br>  a=heappop(); b=heappop()<br>  cost+=a+b<br>  heappush(a+b)<br>return cost</code></p>
+      <p><strong>Key:</strong> Smallest elements should be merged first — they'll participate in more merges but at lower cost.</p>
+    </div>
+    <div class="cheat-card">
+      <h4>📌 Pattern 8 — 2-State DP (Swap Sequences)</h4>
+      <p><strong>Trigger:</strong> "two sequences", "swap positions", "both increasing"</p>
+      <p><strong>Template:</strong><br><code>keep=0; swap=1<br>for i in 1..n:<br>  new_keep=inf; new_swap=inf<br>  if natural_ok: new_keep=min(new_keep,keep)<br>  if swap_prev_ok: new_keep=min(new_keep,swap)<br>  if swap_ok: new_swap=min(new_swap,swap+1)<br>  keep,swap=new_keep,new_swap</code></p>
+      <p><strong>Key:</strong> Binary state per position. Transitions only between compatible state pairs.</p>
+    </div>
+  </div>
+
+  <div class="aha" style="margin-top:32px">
+    <div class="aha-lbl">⚡ The Universal Insight — Burn This Into Memory</div>
+    <p>
+      Every optimization problem has ONE key question: <strong>"What is the contribution of a single move?"</strong><br><br>
+      <span>• If one move affects a contiguous range → diff array or Kadane.</span><br>
+      <span>• If one move eliminates the worst thing → greedy pop (stack).</span><br>
+      <span>• If many moves and we want the best K → sort by contribution, take top K.</span><br>
+      <span>• If we can't enumerate moves but can CHECK a given result → binary search + greedy validator.</span><br>
+      <span>• If cost depends on merge ORDER → heap (smallest contribution first).</span><br>
+      <span>• If two interacting choices per position → DP with 2 states.</span>
+    </p>
+  </div>
+
+  <div class="master-template" style="margin-top:24px">
+    <div class="mt-title">INTERVIEW DECISION FLOWCHART</div>
+    <pre style="background:transparent;border:none;padding:0;color:#c0c8e8;font-size:13px">
+See optimization problem
+         │
+         ▼
+Is it a SUBARRAY/WINDOW problem?
+    YES → Kadane or Sliding Window
+    NO  ↓
+         
+Are there TWO BOUNDARIES you move?
+    YES → Two Pointer (move the bottleneck)
+    NO  ↓
+
+Can you REMOVE K elements greedily?
+    YES → Monotonic Stack (pop when something better arrives)
+    NO  ↓
+
+Are there K OPERATIONS with RANGE EFFECT?
+    YES → Diff Array + Greedy (left to right, fix now)
+    NO  ↓
+
+Must you MINIMIZE MAX or MAXIMIZE MIN?
+    YES → Binary Search on Answer + Greedy Validator
+    NO  ↓
+
+Does MERGE/SPLIT COST depend on order?
+    YES → Min-Heap (Huffman: smallest first)
+    NO  ↓
+
+Are there TWO INTERACTING SEQUENCES with choices per position?
+    YES → 2-State DP (keep/swap transitions)
+    NO  ↓
+
+Sort by contribution + greedy apply K transformations</pre>
+  </div>
+
+</div>
+
+</div><!-- /main -->
+
+<button class="scroll-top" id="stb" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<script>
+const b=document.getElementById('stb');
+window.addEventListener('scroll',()=>b.classList.toggle('vis',scrollY>400));
+</script>
+</body>
+</html>
